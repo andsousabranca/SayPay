@@ -1,13 +1,7 @@
 class Expense < ApplicationRecord
   belongs_to :trip
 
-  validates :local_amount, presence: true, numericality: { greater_than: 0 }
-  validates :base_amount, presence: true, numericality: { greater_than: 0 }
-  validates :category, presence: true, inclusion: { in: CATEGORIES }
-
-  # TODO: update local_amount and base_amount categories with currency model
-
-CATEGORIES = [
+  CATEGORIES = [
     "Meals",
     "Drinks & Nightlife",
     "Local Transport",
@@ -23,4 +17,12 @@ CATEGORIES = [
     "Tips & Gratuities",
     "Other"
   ]
+
+  validates :local_amount, presence: true, numericality: { greater_than: 0 }
+  validates :base_amount, presence: true, numericality: { greater_than: 0 }
+  validates :category, presence: true, inclusion: { in: CATEGORIES }
+
+  # TODO: update local_amount and base_amount categories with currency model
+
+
 end
