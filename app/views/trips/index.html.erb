@@ -1,1 +1,22 @@
-<h1>Index connected</h1>
+
+<div class="max-w-[640px] border p-10">
+
+  <h1 class="text-5xl font-bold mb-10">SayPay</h1>
+
+  <h2><%= @title%></h2>
+
+  <%# Iterating through all the trips %>
+  <ul>
+  <% @trips.each do |trip| %>
+    <%# Each trip links to the creating a new voice record %>
+    <li class = "border p-4 rounded-md my-4 text-center" ><%=link_to(trip.country, new_trip_expense_path(trip))%></li>
+  <%end%>
+  </ul>
+
+
+  <%# Button that redirects to the new trip page %>
+  <div class="flex justify-end">
+    <%=link_to("ADD", new_trip_path)%>
+  </div>
+
+</div>
