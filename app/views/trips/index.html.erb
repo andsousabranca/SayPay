@@ -9,14 +9,17 @@
   <ul>
   <% @trips.each do |trip| %>
     <%# Each trip links to the creating a new voice record %>
-    <li class = "border p-4 rounded-md my-4 text-center" ><%=link_to(trip.country, new_trip_expense_path(trip))%></li>
+   <li class="my-4">
+  <%= link_to trip.country, new_trip_expense_path(trip),
+        class: "block border p-4 rounded-md text-center bg-blue-500 text-white" %>
+</li>
   <%end%>
   </ul>
 
 
   <%# Button that redirects to the new trip page %>
   <div class="flex justify-end">
-    <%=link_to("ADD", new_trip_path)%>
+    <%=link_to("ADD", new_trip_path, class: "block border p-4 rounded-md text-center bg-blue-500 text-white")%>
   </div>
 
 </div>
