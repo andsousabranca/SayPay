@@ -9,6 +9,6 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
 
   # TODO: update currency with expense way of handling currencies
-  validates :base_currency, presence: true, length: { is: 3 }
+  validates :base_currency, presence: true, inclusion: { in: Expense::VALID_CURRENCIES }
   validates :first_name, presence: true
 end
