@@ -1,1 +1,13 @@
-<h1>Trips New Connected</h1>
+<div class="max-w-[640px] border p-10">
+  <h1 class="text-5xl font-bold mb-10">SayPay</h1>
+
+
+<h1 class="text-5xl font-bold mb-10">Create a New Trip</h1>
+
+<%= simple_form_for(@trip) do |f| %>
+  <%= f.input :country%>
+  <%= f.input :budget %>
+  <%= f.submit %>
+<% end %>
+
+</div>

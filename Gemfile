@@ -56,7 +56,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  
+
   # for testing
   gem "httplog"
   gem "pry-byebug"
@@ -72,8 +72,8 @@ end
 gem "devise"
 
 # for markdown
-gem "kramdown" 
-gem "rouge" 
+gem "kramdown"
+gem "rouge"
 gem "kramdown-parser-gfm"
 
 # for web sockets
@@ -84,3 +84,6 @@ gem "ruby_llm", "~> 1.2.0"
 
 # for money and currency handling
 gem 'money-rails', '~> 1.12'
+
+# for simple form access
+gem 'simple_form'

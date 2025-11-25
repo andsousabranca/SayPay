@@ -304,6 +304,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    simple_form (5.4.0)
+      actionpack (>= 7.0)
+      activemodel (>= 7.0)
     solid_cable (1.0.3)
       rails (< 9)
     sprockets (4.2.2)
@@ -372,6 +375,7 @@ DEPENDENCIES
   rouge
   ruby_llm (~> 1.2.0)
   selenium-webdriver
+  simple_form
   solid_cable
   sprockets-rails
   stimulus-rails
