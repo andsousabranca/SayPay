@@ -18,11 +18,12 @@ class Expense < ApplicationRecord
     "Other"
   ]
 
+  VALID_CURRENCIES = Money::Currency.table.keys.map{ |k| k.to_s.upcase }
+
   validates :local_amount, presence: true, numericality: { greater_than: 0 }
   validates :base_amount, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true, inclusion: { in: CATEGORIES }
 
-  # TODO: update local_amount and base_amount categories with currency model
-
-
+  # validate that currency is a valid ISO currency code
+  validates :local_currency, presence: true, inclusion: { in: VALID_CURRENCIES }
 end

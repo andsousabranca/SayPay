@@ -4,8 +4,5 @@ class Chat < ApplicationRecord
   
   validates :title, presence: true
   
-  
   DEFAULT_TITLE = "New Chat"
-
-
 end
