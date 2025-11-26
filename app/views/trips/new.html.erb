@@ -1,1 +1,28 @@
-<h1>Trips New Connected</h1>
+<div class="max-w-[640px] border p-10">
+  <h1 class="text-5xl font-bold mb-10">SayPay</h1>
+
+  <h3 class="text-3xl font-bold mb-10">Create a New Trip</h3>
+
+  <%# Form %>
+  <%= form_with(model: @trip, local: true, html: { class: "rounded-lg border border-gray-300 bg-[#F2FFFB] p-6" }) do |f| %>
+
+    <%# Country %>
+    <div>
+      <%= f.label :country, "Country", class: "block text-sm font-medium text-gray-900" %>
+      <%= f.select :country, ["France", "USA", "Japan", "Spain"], { prompt: "Select a country" }, class: "mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" %>
+    </div>
+
+    <%# Budget %>
+    <div>
+      <%= f.label :budget, "Budget", class: "mt-3 block text-sm font-medium text-gray-900" %>
+      <%= f.number_field :budget, step: 0.01, class: "mt-1 w-full rounded-lg  focus:border-indigo-500 focus:outline-none" %>
+    </div>
+
+    <%# Submit button %>
+    <div>
+      <%= f.submit "Create Trip", class: "block w-full rounded-lg border bg-[#21A179] mt-5 px-12 py-3 text-white transition-colors hover:bg-transparent hover:text-indigo-600" %>
+    </div>
+
+  <% end %>
+
+</div>
