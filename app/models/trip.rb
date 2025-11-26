@@ -1,7 +1,6 @@
 class Trip < ApplicationRecord
   belongs_to :user
-  has_many :recordings, dependent: :destroy
-  has_many :expenses, through: :recordings, dependent: :destroy
+  has_many :expenses, dependent: :destroy
 
   validates :country, presence: true
 

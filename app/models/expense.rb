@@ -1,5 +1,7 @@
 class Expense < ApplicationRecord
-  belongs_to :recording
+  belongs_to :trip
+
+  has_one_attached :audio
 
   CATEGORIES = [
     "Meals",
@@ -20,10 +22,37 @@ class Expense < ApplicationRecord
 
   VALID_CURRENCIES = Money::Currency.table.keys.map{ |k| k.to_s.upcase }
 
-  validates :local_amount, presence: true, numericality: { greater_than: 0 }
-  validates :base_amount, presence: true, numericality: { greater_than: 0 }
-  validates :category, presence: true, inclusion: { in: CATEGORIES }
+  # set defaults when initializing
+  attribute :local_amount, :integer, default: nil
+  attribute :base_amount, :integer, default: nil
+  attribute :category, :string, default: nil
+  attribute :local_currency, :string, default: nil
+
+  # allow nil values
+  validates :local_amount, numericality: { greater_than: 0 }, allow_nil: true
+  validates :base_amount, numericality: { greater_than: 0 }, allow_nil: true
+  validates :category, inclusion: { in: CATEGORIES }, allow_blank: true
 
   # validate that currency is a valid ISO currency code
-  validates :local_currency, presence: true, inclusion: { in: VALID_CURRENCIES }
+  validates :local_currency, inclusion: { in: VALID_CURRENCIES }, allow_blank: true
+
+  # validate acceptable audio file types
+  validate :acceptable_audio
+
+  # TODO: check that audio file is maximum 1 min long
+
+  private
+
+  def acceptable_audio
+    return unless audio.attached?
+
+    unless audio.byte_size <= 5.megabytes
+      errors.add(:audio, "is too big. Maximum size is 5MB.")
+    end
+
+    acceptable_types = %w[audio/webm audio/ogg audio/wav audio/mpeg audio/mp4]
+    unless acceptable_types.include?(audio.content_type)
+      errors.add(:audio, "must be an audio file (webm/ogg/wav/mp3)")
+    end
+  end
 end

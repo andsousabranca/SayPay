@@ -1,16 +1,21 @@
 <div class="text-center">
   <h1 class="font-bold text-2xl">Press to record</h1>
 
-  <%= form_with model: @recording, id: "recording-form", local: true, html: { multipart: true } do |f| %>
+  <%= form_with model: [@trip, @expense], id: "recording-form", local: true, html: { multipart: true } do |f| %>
     <div class="space-y-2">
       <div>
         <button type="button" id="start-recording" class="btn bg-[#21A179] text-white">Start Recording</button>
-        <button type="button" id="stop-recording" class="btn bg-gray-400 text-white hidden">Stop and Send Recording</button>
+        <button type="button" id="stop-recording" class="btn bg-gray-400 text-white hidden" disabled>Stop and Send Recording</button>
+      </div>
+
+      <div id="recording-status" class="mt-2 text-sm text-gray-700 hidden" aria-live="polite">
+        <span id="recording-dot" class="inline-block w-2 h-2 rounded-full bg-red-600 mr-2 hidden" aria-hidden="true"></span>
+        <span id="recording-message"></span>
       </div>
 
       <div>
-        <%= f.hidden_field :trip_id, value: @trip.id%>
-        <%= f.file_field :audio, id: "recording_audio", accept: "audio/*", class: "hidden" %>
+        <%= f.hidden_field :trip_id, value: @trip.id %>
+        <%= f.file_field :audio, id: "expense_audio", accept: "audio/*", class: "hidden" %>
       </div>
     </div>  
   <% end %>
@@ -20,13 +25,19 @@
   document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById('start-recording')
     const stopBtn  = document.getElementById('stop-recording')
-    const fileInput = document.getElementById('recording_audio')
+    const fileInput = document.getElementById('expense_audio')
     const form = document.getElementById('recording-form')
+
+    const statusEl = document.getElementById('recording-status')
+    const statusDot = document.getElementById('recording-dot')
+    const statusMessage = document.getElementById('recording-message')
 
     let mediaRecorder = null
     let stream = null
     let chunks = []
     let recordTimer = null
+    let warmupTimer = null
+    const WARMUP_MS = 800 // short warmup delay (adjust as needed)
     const MAX_MS = 60_000 // 60 seconds
 
     const mimeCandidates = ['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/mp4','audio/wav']
@@ -38,57 +49,115 @@
       return ''
     }
 
+    function showStatus(msg, showDot = false) {
+      statusMessage.textContent = msg
+      statusEl.classList.remove('hidden')
+      if (showDot) statusDot.classList.remove('hidden')
+      else statusDot.classList.add('hidden')
+    }
+
+    function hideStatus() {
+      statusEl.classList.add('hidden')
+      statusDot.classList.add('hidden')
+      statusMessage.textContent = ''
+    }
+
+    function resetUIAfterStop() {
+      // re-enable and reset buttons/UI after form submits or stop
+      startBtn.disabled = false
+      startBtn.classList.remove('hidden')
+      stopBtn.classList.add('hidden')
+      stopBtn.disabled = true
+      hideStatus()
+      chunks = []
+    }
+
     startBtn.addEventListener('click', async (e) => {
       e.preventDefault()
       if (!navigator.mediaDevices || !window.MediaRecorder) return alert('Your browser does not support audio recording')
 
-      startBtn.classList.add('hidden')
-      stopBtn.classList.remove('hidden')
+      // disable to avoid double clicks
+      startBtn.disabled = true
+      showStatus('Initializing microphone...')
 
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-        const mime = supportedMime()
-        mediaRecorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined)
+      } catch (err) {
+        showStatus('Microphone permission required', false)
+        startBtn.disabled = false
+        return
+      }
 
-        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data) }
-        mediaRecorder.onstop = () => {
-          const blob = new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' })
+      // short warmup delay before starting the recording
+      showStatus('Preparing... starting soon', false)
+      warmupTimer = setTimeout(() => {
+        // start real recording after a short warmup
+        try {
+          const mime = supportedMime()
+          mediaRecorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined)
           chunks = []
 
-          const ext = blob.type.split('/').shift() === 'audio' ? blob.type.split('/').pop().split(';')[0] : 'webm'
-          const file = new File([blob], `recording-${Date.now()}.${ext}`, { type: blob.type })
-          const dt = new DataTransfer()
-          dt.items.add(file)
-          fileInput.files = dt.files
+          mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data) }
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' })
+            chunks = []
 
-          // prevent additional clicks and submit immediately
-          stopBtn.disabled = true
-          startBtn.disabled = true
-          form.submit()
-        }
+            const ext = blob.type.split('/').shift() === 'audio' ? blob.type.split('/').pop().split(';')[0] : 'webm'
+            const file = new File([blob], `recording-${Date.now()}.${ext}`, { type: blob.type })
+            const dt = new DataTransfer()
+            dt.items.add(file)
+            fileInput.files = dt.files
 
-        mediaRecorder.start()
-        recordTimer = setTimeout(() => {
-          if (mediaRecorder && mediaRecorder.state === 'recording') {
-            mediaRecorder.stop()
-            // optional: show message or UX to let user know it auto-stopped
+            // prevent additional interactions and submit
+            stopBtn.disabled = true
+            startBtn.disabled = true
+            form.submit()
           }
-        }, MAX_MS)
-      } catch (err) {
-        alert('Microphone permission required: ' + (err.message || err))
-        startBtn.classList.remove('hidden')
-        stopBtn.classList.add('hidden')
-      }
+
+          mediaRecorder.start()
+          // UI switch to actual recording state
+          startBtn.classList.add('hidden')
+          stopBtn.classList.remove('hidden')
+          stopBtn.disabled = false
+          showStatus('Recording — Speak now', true)
+
+          // auto stop after max duration
+          recordTimer = setTimeout(() => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+              mediaRecorder.stop()
+              showStatus('Recording stopped automatically after 60s', false)
+            }
+          }, MAX_MS)
+        } catch (err) {
+          showStatus('Could not start recording: ' + (err.message || err), false)
+          startBtn.disabled = false
+        }
+      }, WARMUP_MS)
     })
 
     stopBtn.addEventListener('click', (e) => {
       e.preventDefault()
+      // if warmup not finished, cancel warmup and reset UI
+      if (warmupTimer) {
+        clearTimeout(warmupTimer)
+        warmupTimer = null
+        if (stream) {
+          stream.getTracks().forEach(t => t.stop())
+          stream = null
+        }
+        resetUIAfterStop()
+        return
+      }
+
       if (recordTimer) {
         clearTimeout(recordTimer)
         recordTimer = null
       }
       if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop()
       if (stream) stream.getTracks().forEach(t => t.stop())
+      // reset UI will be handled after submission if form will redirect;
+      // If you want immediate reset without navigation, uncomment:
+      // resetUIAfterStop()
     })
   })
 </script>

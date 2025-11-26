@@ -80,10 +80,13 @@ gem "kramdown-parser-gfm"
 gem "solid_cable"
 
 # Ruby LLM
-gem "ruby_llm", "~> 1.2.0"
+gem "ruby_llm"
 
 # for money and currency handling
 gem 'money-rails', '~> 1.12'
 
 # for cloudinary audio handling
 gem "cloudinary"
+
+# to convert audio files to different formats
+gem 'streamio-ffmpeg', '~> 3.0', '>= 3.0.2'
