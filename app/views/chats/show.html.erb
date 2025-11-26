@@ -1,13 +1,23 @@
 <div class="max-w-[390px] h-[calc(100vh-4rem)] border flex flex-col">
 
+  <h1 class="text-5xl font-bold mb-4">SayPay</h1>
   <%# SayPay Logo %>
-  <div class="p-6">
-    <h1 class="text-5xl font-bold mb-4">SayPay</h1>
-    <p>Text will be here.</p>
-  </div>
+  <div id ="text-area" class="p-6 flex-1 overflow-auto">
 
-  <%# Conversation space %>
-  <div id="text-screen" class="p-6 flex-1 overflow-y-auto">
+    <ul class="flex flex-col space-y-2">
+      <% @messages.each do |message| %>
+      <%# right = user, left = assistant LLM %>
+        <li class="flex <%= message.role == 'user' ? 'justify-end' : 'justify-start' %>">
+
+          <%# conversation bubble %>
+          <div class="max-w-xs px-4 py-2 rounded-lg
+            <%= message.role == 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black' %>">
+            <%= message.content %>
+          </div>
+
+        </li>
+      <% end %>
+    </ul>
   </div>
 
   <%# Chatbox  %>
