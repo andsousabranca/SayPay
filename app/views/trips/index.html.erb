@@ -1,1 +1,35 @@
-<h1>Index connected</h1>
+<div class="max-w-[640px] border p-10">
+
+
+  <div class="flex justify-between mb-10">
+  <h1 class="text-5xl font-bold">SayPay</h1>
+  <%= link_to "#", class: "p-3 rounded-full bg-[#C9D2CF] text-black flex items-center justify-center" do %>
+    <i data-lucide="ellipsis-vertical"></i>
+  <% end %>
+  </div>
+
+
+
+
+  <h2><%= @title%></h2>
+
+  <%# Iterating through all the trips %>
+  <ul>
+  <% @trips.each do |trip| %>
+    <%# Each trip links to the creating a new voice record %>
+   <li class="my-4">
+  <%= link_to trip.country, new_trip_expense_path(trip),
+        class: "block border p-4 rounded-md text-center bg-blue-500 text-white" %>
+</li>
+  <%end%>
+  </ul>
+
+
+  <%# Button that redirects to the new trip page %>
+ <div class="flex justify-end">
+  <%= link_to new_trip_path, class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
+    <i data-lucide="plus" class="w-6 h-6"></i>
+  <% end %>
+</div>
+
+</div>

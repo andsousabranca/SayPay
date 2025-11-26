@@ -23,3 +23,5 @@ puts "Trip count: #{Trip.count}"
 puts "Expense count: #{Expense.count}"
 puts "Chat count: #{Chat.count}"
 puts "Message count: #{Message.count}"
+
+

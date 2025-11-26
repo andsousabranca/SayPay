@@ -1,0 +1,53 @@
+[33mcommit 508ebbc9f1e09cc52c6fab822a0a64d88427b3fc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32m4-creating-trips-index-page-2[m[33m, [m[1;31morigin/4-creating-trips-index-page[m[33m, [m[1;32m4-creating-trips-index-page[m[33m)[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 17:46:39 2025 +0800
+
+    added controllers and routes
+
+[33mcommit 0cf68652b6bee21ebc5586ebae1caa65a1e9bb87[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 16:41:31 2025 +0800
+
+    upated code
+
+[33mcommit f4219d57c40bef462f5ae84f9af6516d179f7433[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 16:27:01 2025 +0800
+
+    updated root
+
+[33mcommit fa0fc7ac3a6e0432a818bafde7deb2eeea46e96f[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 16:09:52 2025 +0800
+
+    added validation and open todos on them
+
+[33mcommit 04fb0a555f12a6748213950c92767dd4c444ce6b[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 15:05:02 2025 +0800
+
+    created schema
+
+[33mcommit ea81f1909726552898c18a8b3d2e0a6bff0bc3c8[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 12:56:25 2025 +0800
+
+    added tailwind
+
+[33mcommit e6a6b774f2a321b6b565896a1f3e4de6f73931c9[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 12:54:28 2025 +0800
+
+    installed devise
+
+[33mcommit c058bd059f32bf088b3b80bc0d4976618ac1c8f4[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 12:53:04 2025 +0800
+
+    added bundles and set up ruby_llm
+
+[33mcommit 76735cefd2a0007fa865d32cbc8cc88f4e0132ec[m
+Author: Andreas Sousa Branca <andreaslsb@gmail.com>
+Date:   Mon Nov 24 12:46:34 2025 +0800
+
+    Rails new

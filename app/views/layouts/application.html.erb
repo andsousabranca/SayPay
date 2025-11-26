@@ -13,9 +13,25 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
 
+    <%# Importing the Lucide icons into the project %>
+      <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+      <script>
+        document.addEventListener("turbo:load", () => {
+          lucide.createIcons();
+        });
+      </script>
+
+  </head>
   <body>
     <%= yield %>
+    <nav>
+      <% if user_signed_in? %>
+        <%= render "shared/navbar_logged" %>
+      <% else %>
+        <%= render "shared/navbar_public" %>
+      <% end %>
+    </nav>
+
   </body>
 </html>
