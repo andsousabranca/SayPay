@@ -1,3 +1,54 @@
-<div class="max-w-[390px] border p-10 flex-1">
-  <h1>DASHBOARD</h1>
+<div id="main-screen" class="max-w-[390px] border p-8 flex-1 bg-[#C9D2CF]">
+
+  <%# SayPay Logo %>
+  <h1 class="mb-5 text-5xl font-bold">SayPay</h1>
+
+  <%# Summary %>
+  <div id="exp-summary" class="border rounded-md mb-5">
+    Trip summary
+    <div class="flex justify-between">
+      <p>total spent</p>
+      <p>Remaining</p>
+      <p>Transactions</p>
+    </div>
+  </div>
+
+  <%# Filters %>
+  <div id="exp-filter" class="flex justify-around mb-5">
+    <div class="border rounded-md">Date Range</div>
+    <div class="border rounded-md">Category</div>
+  </div>
+
+  <%# Sub-Title %>
+  <h3 class="mb-5 text-xl font-bold">Recent Expenses</h3>
+
+  <%# Cards %>
+  <div id="exp-recent-cards" class="mb-5">
+    <ul>
+      <li class="flex border rounded-md">
+        <div id="logo" class="logo p-2">Logo</div>
+        <div id="location-date" class="flex-grow p-2">
+          <p>restaurant name</p>
+          <p>date</p>
+        </div>
+        <div id="price-category" class="p-2">
+          <p>price</p>
+          <p>category</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <%# Sub-Title %>
+  <h3 class="mb-5 text-xl font-bold">Spending Breakdown</h3>
+
+  <%# Pie Chart %>
+  <div id="exp-piechart" class="p-20 border rounded-md mb-5">Pie chart here</div>
+
+  <%# Sub-Title %>
+  <h3 class="mb-5 text-xl font-bold">Spending overtime</h3>
+
+  <%# Graph Chart %>
+  <div id="exp-graph" class="p-20 border rounded-md"> graph here</div>
+
 </div>
