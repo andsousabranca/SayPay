@@ -82,6 +82,7 @@ gem "solid_cable"
 # Ruby LLM
 gem "ruby_llm"
 
+
 # for money and currency handling
 gem 'money-rails', '~> 1.12'
 

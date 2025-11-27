@@ -18,10 +18,10 @@ user = User.create!(email: "test@test.de", password: "123123", first_name: "Test
 
 Trip.create!(user_id: user.id, country: "Germany", budget: 1000)
 
+Chat.create!(user_id: user.id, title: "test")
+
 puts "User count: #{User.count}"
 puts "Trip count: #{Trip.count}"
 puts "Expense count: #{Expense.count}"
 puts "Chat count: #{Chat.count}"
 puts "Message count: #{Message.count}"
-
-

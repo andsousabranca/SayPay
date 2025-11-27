@@ -34,9 +34,15 @@ If you need user details (monthly income, recurring bills, currency, or goals), 
   private
 
   def build_conversation_history
+    raw_block_array = []
+
     @chat.messages.each do |message|
-      @ruby_llm_chat.add_message(message)
+      raw_block_array.push({ type: 'text', text: message.content })
     end
+
+    raw_block = RubyLLM::Content::Raw.new(raw_block_array)
+
+    @ruby_llm_chat.add_message(role: :system, content: raw_block)
   end
 
   def message_params
