@@ -71,17 +71,11 @@ end
 
 gem "devise"
 
-# for markdown
-gem "kramdown"
-gem "rouge"
-gem "kramdown-parser-gfm"
-
-# for web sockets
-gem "solid_cable"
-
 # Ruby LLM
 gem "ruby_llm"
 
+# Solid_cable for chat streaming
+gem "solid_cable"
 
 # for money and currency handling
 gem 'money-rails', '~> 1.12'
@@ -91,3 +85,12 @@ gem "cloudinary"
 
 # to convert audio files to different formats
 gem 'streamio-ffmpeg', '~> 3.0', '>= 3.0.2'
+
+# Markdown rendering
+gem "kramdown"
+
+# GitHub Flavored Markdown support
+gem "kramdown-parser-gfm"
+
+# Syntax highlighting
+gem "rouge"
