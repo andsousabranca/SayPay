@@ -1,6 +1,215 @@
-<h1 class="text-1xl">SayPay</h1>
-<p>Welcome to SayPay, your personal expense tracker and chat assistant!</p>
-<p>Get started by creating a new trip or starting a chat.</p>
-<%= link_to "Test", "#", class: "btn btn-primary" %>
+<div class="flex-1">
 
-<%= link_to "Test", "#", class: "btn  " %>
+  <%# Hero start %>
+  <div
+    class="hero min-h-screen"
+    style="background-image: url(https://images.unsplash.com/photo-1612769254949-deb42c1fbbf7?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);"
+  >
+    <div class="hero-overlay"></div>
+    <div class="hero-content text-neutral-content text-center">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Track every travel expense with your voice.</h1>
+        <p class="mb-5">
+          Say what you spent. We do the rest. <br>
+          Instantly and accurately.
+        </p>
+        <button class="btn bg-[#21A179] text-white">Start recording!</button>
+      </div>
+    </div>
+  </div>
+
+  <%# Why SayPay? %>
+
+  <section class="px-5 py-10 bg-white">
+    <h2 class="text-2xl font-semibold text-[#06231B] mb-4">
+      Why SayPay?
+    </h2>
+
+    <p class="text-[#06231B] mb-6">
+      Traveling in cash-heavy countries makes it difficult to track what you really spend. SayPay fixes this — instantly, using your voice.
+    </p>
+
+    <div class="space-y-4">
+
+      <!-- Reason -->
+      <div class="border-l-4 border-[#21A179] pl-4 py-1">
+        <p class="text-[#06231B]">
+          Cash payments are easy to forget and hard to track.
+        </p>
+      </div>
+
+      <!-- Reason -->
+      <div class="border-l-4 border-[#21A179] pl-4 py-1">
+        <p class="text-[#06231B]">
+          Receipts get lost quickly while traveling.
+        </p>
+      </div>
+
+      <!-- Reason -->
+      <div class="border-l-4 border-[#21A179] pl-4 py-1">
+        <p class="text-[#06231B]">
+          Manual expense apps take time and break the travel flow.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section class="px-5 py-10 bg-[#E6ECEA]">
+    <h2 class="text-2xl font-semibold text-[#06231B] mb-6">
+      How It Works
+    </h2>
+
+    <div class="space-y-5">
+
+      <!-- STEP 1 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 flex gap-4 items-start">
+        <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[#21A179] text-white font-semibold leading-none">
+          1
+        </div>
+        <div>
+          <h3 class="font-semibold text-[#06231B] mb-1">Speak</h3>
+          <p class="text-[#06231B]/70 text-sm">
+            Say what you spent: “I paid 12 Euro at a cafe.” SayPay extracts amount, currency, and category instantly.
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 flex gap-4 items-start">
+        <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[#21A179] text-white font-semibold leading-none">
+          2
+        </div>
+        <div>
+          <h3 class="font-semibold text-[#06231B] mb-1">Track</h3>
+          <p class="text-[#06231B]/70 text-sm">
+            Your expenses get logged automatically. No typing, no hassle, no lost receipts.
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="bg-white rounded-xl shadow-sm p-5 flex gap-4 items-start">
+        <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-[#21A179] text-white font-semibold leading-none">
+          3
+        </div>
+        <div>
+          <h3 class="font-semibold text-[#06231B] mb-1">Understand</h3>
+          <p class="text-[#06231B]/70 text-sm">
+            Dashboards and insights show how you spend per trip and category. Plus AI tips to help you save.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="px-5 py-10 bg-white">
+    <h2 class="text-2xl font-semibold text-[#06231B] mb-6">
+      Powerful Features
+    </h2>
+
+    <div class="space-y-6">
+
+      <!-- Feature 1 -->
+      <div class="bg-[#DDF8F0] rounded-xl p-5">
+        <h3 class="font-semibold text-[#06231B] mb-1">Smart Dashboards</h3>
+        <p class="text-[#06231B]/70 text-sm">
+          Understand your spending per day, category, and trip with clean visual charts.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-[#DDF8F0] rounded-xl p-5">
+        <h3 class="font-semibold text-[#06231B] mb-1">AI Travel Expense Coach</h3>
+        <p class="text-[#06231B]/70 text-sm">
+          Ask anything. Get insights, trends, and tips to improve your travel budgeting.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-[#DDF8F0] rounded-xl p-5">
+        <h3 class="font-semibold text-[#06231B] mb-1">Budgets & Alerts</h3>
+        <p class="text-[#06231B]/70 text-sm">
+          Set spending limits per trip or category and get notified before you overspend.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PREVIEW SCREENS SECTION -->
+  <section class="px-5 py-10 bg-[#E6ECEA]">
+    <h2 class="text-2xl font-semibold text-[#06231B] mb-6">
+      See SayPay in Action
+    </h2>
+
+    <div class="flex gap-4 overflow-x-scroll no-scrollbar">
+      <!-- Example Screen -->
+      <div class="min-w-[180px] bg-white rounded-xl shadow-sm p-3">
+        <div class="h-40 bg-[#C9D2CF] rounded-lg"></div>
+        <p class="text-xs text-center text-[#06231B]/60 mt-2">Recording Screen</p>
+      </div>
+
+      <!-- Example Screen -->
+      <div class="min-w-[180px] bg-white rounded-xl shadow-sm p-3">
+        <div class="h-40 bg-[#C9D2CF] rounded-lg"></div>
+        <p class="text-xs text-center text-[#06231B]/60 mt-2">Expense List</p>
+      </div>
+
+      <!-- Example Screen -->
+      <div class="min-w-[180px] bg-white rounded-xl shadow-sm p-3">
+        <div class="h-40 bg-[#C9D2CF] rounded-lg"></div>
+        <p class="text-xs text-center text-[#06231B]/60 mt-2">Dashboard</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="px-5 py-10 bg-white">
+    <h2 class="text-2xl font-semibold text-[#06231B] mb-6">
+      Loved by Travelers
+    </h2>
+
+    <div class="space-y-6">
+
+      <div class="bg-[#DDF8F0] rounded-xl p-4">
+        <p class="text-[#06231B] text-sm">
+          “Tracked my entire Japan trip without typing once.”
+        </p>
+        <p class="text-xs text-[#06231B]/70 mt-2">— Mia, 26</p>
+      </div>
+
+      <div class="bg-[#DDF8F0] rounded-xl p-4">
+        <p class="text-[#06231B] text-sm">
+          “Finally a budgeting app built for real travelers.”
+        </p>
+        <p class="text-xs text-[#06231B]/70 mt-2">— Luca, 24</p>
+      </div>
+
+      <div class="bg-[#DDF8F0] rounded-xl p-4">
+        <p class="text-[#06231B] text-sm">
+          “The AI tips helped me save over €100 last month!”
+        </p>
+        <p class="text-xs text-[#06231B]/70 mt-2">— Zoé, 27</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="px-5 py-10 bg-[#06231B] text-white text-center">
+    <h2 class="text-2xl font-semibold mb-4">
+      Ready to Track Your Trip Smarter?
+    </h2>
+    <p class="text-white/80 text-sm mb-6">
+      Start using SayPay in your mobile browser. <br>
+      Completely free.
+    </p>
+
+    <%= link_to "Start Using SayPay",
+      "#",
+      class: "inline-block bg-[#21A179] text-white px-8 py-3 rounded-full text-base font-semibold" %>
+  </section>
+</div>

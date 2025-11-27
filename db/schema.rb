@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_27_034909) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_27_082253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,14 +52,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_034909) do
 
   create_table "expenses", force: :cascade do |t|
     t.string "category"
-    t.string "local_currency"
-    t.float "local_amount"
-    t.float "base_amount"
     t.text "audio_transcript"
     t.text "notes"
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "local_amount_cents", default: 0, null: false
+    t.string "local_amount_currency", default: "USD", null: false
+    t.integer "base_amount_cents", default: 0, null: false
+    t.string "base_amount_currency", default: "USD", null: false
     t.index ["trip_id"], name: "index_expenses_on_trip_id"
   end
 
@@ -70,13 +71,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_034909) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
-  end
-
-  create_table "recordings", force: :cascade do |t|
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_recordings_on_trip_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -116,6 +110,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_034909) do
   add_foreign_key "chats", "users"
   add_foreign_key "expenses", "trips"
   add_foreign_key "messages", "chats"
-  add_foreign_key "recordings", "trips"
   add_foreign_key "trips", "users"
 end
