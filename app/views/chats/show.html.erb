@@ -1,3 +1,6 @@
+<%# Subscribing the client to a channel%>
+<%= turbo_stream_from @chat %>
+
 <div class="max-w-[390px] h-[calc(100vh-4rem)] border flex flex-col">
 
   <%# SayPay Logo %>
@@ -5,7 +8,7 @@
 
   <%# Messages %>
   <div id ="messages" class="p-6 flex-1 overflow-auto">
-    <%= render "messages/message", messages: @chat.messages %>
+    <%= render "messages/messages", messages: @chat.messages %>
   </div>
 
   <%# Chatbox  %>

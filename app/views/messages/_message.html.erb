@@ -1,14 +1,16 @@
-<ul class="flex flex-col space-y-2">
-  <% messages.each do |message| %>
-  <%# right = user, left = assistant LLM %>
-    <li class="flex <%= message.role == 'user' ? 'justify-end' : 'justify-start' %>">
-
-      <%# conversation bubble %>
-      <div class="max-w-xs px-4 py-2 rounded-lg
-        <%= message.role == 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black' %>">
-        <%= message.content %>
+<% if message.role == "user" %>
+  <div class="d-flex justify-content-end mb-2">
+    <div>
+      <div class="bg-white px-3 pb-1 pt-3 rounded-pill">
+        <%= raw(render_markdown(message.content)) %>
       </div>
+    </div>
+  </div>
 
-    </li>
-  <% end %>
-</ul>
+<% elsif message.role == "assistant" %>
+  <div class="d-flex justify-content-start mb-5" id="<%= dom_id(message) %>">
+    <div class="px-3 pb-0 pt-3">
+      <%= message.content.present? ? raw(render_markdown(message.content)) : "..." %>
+    </div>
+  </div>
+<% end %>
