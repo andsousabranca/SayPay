@@ -1,22 +1,31 @@
-<div id="main-screen" class="max-w-[390px] border p-8 flex-1 bg-[#C9D2CF]">
+<div id="main-screen" class="max-w-[390px] border p-8 flex-1">
 
   <%# SayPay Logo %>
   <h1 class="mb-5 text-5xl font-bold">SayPay</h1>
 
   <%# Summary %>
-  <div id="exp-summary" class="border rounded-md mb-5">
-    Trip summary
+  <div id="exp-summary" class="border border-gray-300 rounded-md mb-5 bg-[#DDF8F0] p-2">
+    <h3 class="mb-3 text-md font-bold">Trip Summary:</h3>
     <div class="flex justify-between">
-      <p>total spent</p>
-      <p>Remaining</p>
-      <p>Transactions</p>
+      <div>
+        <p class="text-center"><%=@summary[0]%> €</p>
+        <p>total spent</p>
+      </div>
+      <div>
+        <p class="text-center"><%=@summary[1]%> €</p>
+        <p>Remaining</p>
+      </div>
+      <div>
+        <p class="text-center"><%=@summary[2]%></p>
+        <p>Transactions</p>
+      </div>
     </div>
   </div>
 
   <%# Filters %>
-  <div id="exp-filter" class="flex justify-around mb-5">
-    <div class="border rounded-md">Date Range</div>
-    <div class="border rounded-md">Category</div>
+  <div id="exp-filter" class="flex justify-around mb-5 border">
+    <div class="border border-gray-300 rounded-md p-2">Trips</div>
+    <div class="border border-gray-300 rounded-md p-2">Category</div>
   </div>
 
   <%# Sub-Title %>
@@ -25,17 +34,23 @@
   <%# Cards %>
   <div id="exp-recent-cards" class="mb-5">
     <ul>
-      <li class="flex border rounded-md">
-        <div id="logo" class="logo p-2">Logo</div>
+      <%@expenses.each do |expense|%>
+      <li class="flex border border-gray-300 rounded-md mb-2 p-2">
+        <div id="logo" class="logo p-2">
+          <p>Logo</p>
+          <p>Flag</p>
+        </div>
         <div id="location-date" class="flex-grow p-2">
           <p>restaurant name</p>
           <p>date</p>
         </div>
         <div id="price-category" class="p-2">
-          <p>price</p>
-          <p>category</p>
+          <p><%=expense.base_amount%> €</p>
+          <p><%=expense.category%></p>
         </div>
       </li>
+
+      <%end%>
     </ul>
   </div>
 
@@ -43,12 +58,18 @@
   <h3 class="mb-5 text-xl font-bold">Spending Breakdown</h3>
 
   <%# Pie Chart %>
-  <div id="exp-piechart" class="p-20 border rounded-md mb-5">Pie chart here</div>
+  <div id="exp-piechart" class="p-20 border border-gray-300 rounded-md mb-5">Pie chart here</div>
 
   <%# Sub-Title %>
   <h3 class="mb-5 text-xl font-bold">Spending overtime</h3>
 
   <%# Graph Chart %>
-  <div id="exp-graph" class="p-20 border rounded-md"> graph here</div>
+  <div id="exp-graph" class="p-20 border border-gray-300 rounded-md"> graph here</div>
 
 </div>
+
+
+<%# TO DO %>
+<%# add currency sign to expense table or link it to base_currency %>
+<%# add date to expense table %>
+<%# add logo to category %>
