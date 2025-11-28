@@ -1,6 +1,8 @@
 class ExpensesController < ApplicationController
 
   def index
+    @expenses = Expense.all
+    @summary = summarize_exp
   end
 
   def new
@@ -41,10 +43,26 @@ class ExpensesController < ApplicationController
       flash.now[:alert] = @expense.errors.full_messages.to_sentence
       render "expenses/edit", status: :unprocessable_entity
     end
-
   end
 
   private
+  
+    def summarize_exp
+    # Replace with current user!
+    @user = User.last
+
+    remaining = @user.trips[0].budget
+    spent = 0
+    count = 0
+
+    @expenses.each do |expense|
+      spent += expense.base_amount
+      count += 1
+    end
+
+    remaining -= spent
+    return spent, remaining, count
+  end
 
   def expense_params
     params.require(:expense).permit(:trip_id, :audio, :local_amount, :local_amount_currency, :category)
