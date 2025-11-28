@@ -17,9 +17,7 @@
       Instantly and accurately.
     </p>
 
-    <button class="btn bg-[#21A179] text-white rounded-full px-8">
-      Start recording!
-    </button>
+    <%= link_to "Start recording!", trips_path, class: "btn bg-[#21A179] text-white rounded-full px-8" %>
 
     <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
       <svg xmlns="http://www.w3.org/2000/svg" 
@@ -225,8 +223,7 @@
       Completely free.
     </p>
 
-    <%= link_to "Start Using SayPay",
-      "#",
+    <%= link_to "Start Using SayPay", trips_path,
       class: "inline-block bg-[#21A179] text-white px-8 py-3 rounded-full text-base font-semibold" %>
   </section>
 
