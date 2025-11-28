@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
 
   def index
     @expenses = Expense.all
+    @trips = Trip.all
     @summary = summarize_exp
   end
 
@@ -36,7 +37,7 @@ class ExpensesController < ApplicationController
   def update
     @expense = Expense.find(params[:id])
     @trip = @expense.trip
-    
+
     if @expense.update(expense_params.except(:audio))
       redirect_to new_trip_expense_path(@trip), notice: "Expense updated successfully."
     else
@@ -46,22 +47,27 @@ class ExpensesController < ApplicationController
   end
 
   private
-  
+
     def summarize_exp
     # Replace with current user!
-    @user = User.last
 
-    remaining = @user.trips[0].budget
-    spent = 0
-    count = 0
+    @user = current_user.id
 
-    @expenses.each do |expense|
-      spent += expense.base_amount
-      count += 1
+    remaining = 0
+
+    @trips.each do |trip|
+      remaining += trip.budget
     end
 
-    remaining -= spent
-    return spent, remaining, count
+    # remaining = @user.trips[0].budget
+    spent = 0
+    count = 0
+    @expenses.each do |expense|
+      spent += expense.base_amount.fractional
+      count += 1
+    end
+    remaining -= (spent/100)
+    return (spent/100), remaining, count
   end
 
   def expense_params

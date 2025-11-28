@@ -13,13 +13,13 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
 
   # When Devise will be active
-  # @trip.user_id = current_user.id
-  if User.exists?(id: 8)
-    @trip.user_id = 8
-  else
-    puts "User id does not exist"
-    raise
-  end
+  @trip.user_id = current_user.id
+  # if User.exists?(id: 8)
+  #   @trip.user_id = 8
+  # else
+  #   puts "User id does not exist"
+  #   raise
+  # end
 
     if @trip.save
       redirect_to trips_path
