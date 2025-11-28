@@ -10,7 +10,7 @@
 
 <%# Container %>
 <div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
-  <h1 class="font-bold text-2xl">Press to record for your trip in <%= @trip.country %></h1>
+  <h1 class="font-bold text-2xl mb-4">Press to record for your trip in <%= @trip.country %></h1>
 
   <%= form_with model: [@trip, @expense], id: "recording-form", local: true, html: { multipart: true } do |f| %>
     <div class="space-y-2">
