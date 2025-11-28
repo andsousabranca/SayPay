@@ -1,13 +1,16 @@
-<div class="max-w-[390px] border p-10 flex-1">
+<%# LOGO %>
+<div class="flex justify-between my-10 mx-3">
+  <h1 class="text-5xl font-semibold text-white">SayPay</h1>
+  <%= link_to "#", class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
+  <%# <i data-lucide="ellipsis-vertical"></i> %>
+  <i data-lucide="text-align-justify"></i>
+  <% end %>
+</div>
 
-  <div class="flex justify-between mb-10">
-    <h1 class="text-5xl font-bold">SayPay</h1>
-    <%= link_to "#", class: "p-3 rounded-full bg-[#C9D2CF] text-black flex items-center justify-center" do %>
-      <i data-lucide="ellipsis-vertical"></i>
-    <% end %>
-  </div>
+<%# Container %>
+<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
 
-  <h2><%= @title%></h2>
+  <h2 class="font-bold"><%= @title%></h2>
 
   <%# Iterating through all the trips %>
   <ul>
@@ -21,9 +24,9 @@
   </ul>
 
   <%# Button that redirects to the new trip page %>
- <div class="flex justify-end">
-    <%= link_to new_trip_path, class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
-      <i data-lucide="plus" class="w-6 h-6"></i>
+  <div class="flex justify-end">
+    <%= link_to new_trip_path, class: "p-3 rounded-full bg-[#DDF8F0] border text-green flex items-center justify-center" do %>
+    <i data-lucide="plus" class="w-6 h-6"></i>
     <% end %>
   </div>
 

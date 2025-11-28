@@ -1,6 +1,15 @@
-<div class="max-w-[390px] border p-10 flex-1">
-  <h1 class="text-5xl font-bold mb-10">SayPay</h1>
+<%# LOGO %>
+<div class="flex justify-between my-10 mx-3">
+  <h1 class="text-5xl font-semibold text-white">SayPay</h1>
+  <%= link_to "#", class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
+  <%# <i data-lucide="ellipsis-vertical"></i> %>
+  <i data-lucide="text-align-justify"></i>
+  <% end %>
+</div>
 
+<%# Container %>
+<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
+  <%# Sub title %>
   <h3 class="text-3xl font-bold mb-10">Create a New Trip</h3>
 
   <%# Form %>
@@ -9,7 +18,7 @@
     <%# Country %>
     <div>
       <%= f.label :country, "Country", class: "block text-sm font-medium text-gray-900" %>
-      <%= f.select :country, ["France", "USA", "Japan", "Spain"], { prompt: "Select a country" }, class: "mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" %>
+      <%= f.select :country, ["Indonesia", "Vietnam", "Cambodia", "Laos", "Thailand"], { prompt: "Select a country" }, class: "mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" %>
     </div>
 
     <%# Budget %>
@@ -22,7 +31,5 @@
     <div>
       <%= f.submit "Create Trip", class: "block w-full rounded-lg border bg-[#21A179] mt-5 px-12 py-3 text-white transition-colors hover:bg-transparent hover:text-indigo-600" %>
     </div>
-
   <% end %>
-
 </div>

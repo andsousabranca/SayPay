@@ -2,7 +2,7 @@ class TripsController < ApplicationController
 
   def index
     @trips = Trip.all
-    @trips.count > 0 ? @title = "Trips List:" : @title = "You have no trips yet."
+    @trips.count > 0 ? @title = "Trips" : @title = "Create a trip and start logging expenses!"
   end
 
   def new
@@ -11,9 +11,15 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
-    @trip.user_id = 2
-    # When Devise will be active
-    @trip.user_id = current_user.id
+
+  # When Devise will be active
+  # @trip.user_id = current_user.id
+  if User.exists?(id: 8)
+    @trip.user_id = 8
+  else
+    puts "User id does not exist"
+    raise
+  end
 
     if @trip.save
       redirect_to trips_path
