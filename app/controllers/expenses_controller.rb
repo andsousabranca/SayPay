@@ -45,7 +45,6 @@ class ExpensesController < ApplicationController
     return spent, remaining, count
   end
 
-  private
 
   def expense_params
     params.require(:expense).permit(:trip_id, :audio)
