@@ -1,11 +1,22 @@
-<div class="flex-1 text-center">
+<%# LOGO %>
+<div class="flex justify-between my-10 mx-3">
+  <h1 class="text-5xl font-semibold text-white">SayPay</h1>
+  <%= link_to "#", class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
+  <%# <i data-lucide="ellipsis-vertical"></i> %>
+  <i data-lucide="text-align-justify"></i>
+  <% end %>
+</div>
+
+
+<%# Container %>
+<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
   <h1 class="font-bold text-2xl">Press to record</h1>
 
   <%= form_with model: [@trip, @expense], id: "recording-form", local: true, html: { multipart: true } do |f| %>
     <div class="space-y-2">
       <div>
-        <button type="button" id="start-recording" class="btn bg-[#21A179] text-white">Start Recording</button>
-        <button type="button" id="stop-recording" class="btn bg-gray-400 text-white hidden" disabled>Stop and Send Recording</button>
+        <button type="button" id="start-recording" class="btn rounded-full bg-[#21A179] text-white">Start Recording</button>
+        <button type="button" id="stop-recording" class="btn rounded-full bg-gray-400 text-white hidden" disabled>Stop and Send Recording</button>
       </div>
 
       <div id="recording-status" class="mt-2 text-sm text-gray-700 hidden" aria-live="polite">
@@ -17,10 +28,11 @@
         <%= f.hidden_field :trip_id, value: @trip.id %>
         <%= f.file_field :audio, id: "expense_audio", accept: "audio/*", class: "hidden" %>
       </div>
-    </div>  
+    </div>
   <% end %>
 </div>
 
+<%# In stimulus and JS file! %>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById('start-recording')
