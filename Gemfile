@@ -83,9 +83,6 @@ gem 'money-rails', '~> 1.12'
 # for cloudinary audio handling
 gem "cloudinary"
 
-# to convert audio files to different formats
-gem 'streamio-ffmpeg', '~> 3.0', '>= 3.0.2'
-
 # Markdown rendering
 gem "kramdown"
 
