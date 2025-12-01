@@ -13,7 +13,7 @@
       </h2>
 
       <p class="text-sm text-[#06231B]/60">
-        22nd November to 30th November
+        <%= "from #{@trip.start_date.strftime('%d %B')} to #{@trip.end_date.strftime('%d %B %Y')}" %>
       </p>
 
       <p class="text-sm text-[#06231B]/60 mt-1">
