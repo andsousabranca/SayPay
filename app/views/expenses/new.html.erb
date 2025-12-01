@@ -12,84 +12,83 @@
   </div>
 
   <%# TRIP CARD (photo + info combined) %>
-<div class="w-full bg-white rounded-2xl shadow-md overflow-hidden mb-10">
+  <div class="w-full bg-white rounded-2xl shadow-md overflow-hidden mb-10">
 
-  <%# Trip Photo %>
-  <%= image_tag @trip.url,
-        class: "w-full h-44 object-cover" %>
+    <%# Trip Photo %>
+    <%= image_tag @trip.url,
+          class: "w-full h-30 object-cover" %>
 
-  <%# Trip Info %>
-  <div class="p-4">
-    <h2 class="text-xl font-semibold text-[#06231B]">
-      <%= @trip.country %>
-    </h2>
-    
-     <p class="text-sm text-[#06231B]/60 mt-1">
-      Budget: <span class="font-semibold text-[#06231B]"><%= @trip.budget%> $</span>
-     </p>
+    <%# Trip Info %>
+    <div class="p-2">
+      <h2 class="text-xl font-semibold text-[#06231B]">
+        <%= @trip.country %>
+      </h2>
+      
+      <p class="text-sm text-[#06231B]/60 mt-1">
+        Budget: <span class="font-semibold text-[#06231B]"><%= @trip.budget%> $</span>
+      </p>
 
-    <p class="text-sm text-[#06231B]/60 mt-1">
-      <%= "from #{@trip.start_date.strftime('%d %B')} to #{@trip.end_date.strftime('%d %B %Y')}" %>
-    </p>
+      <p class="text-sm text-[#06231B]/60 mt-1">
+        <%= "from #{@trip.start_date.strftime('%d %B')} to #{@trip.end_date.strftime('%d %B %Y')}" %>
+      </p>
 
-    <p class="text-sm text-[#06231B]/60 mt-1">
-      Total spent:
-      <span class="font-semibold text-[#06231B]">€1000</span>
-    </p>
+      <p class="text-sm text-[#06231B]/60 mt-1">
+        Total spent:
+        <span class="font-semibold text-[#06231B]">€1000</span>
+      </p>
+    </div>
+
   </div>
 
-</div>
+  <div class="w-full flex flex-col items-center" style="min-height: 260px;">
 
-  <%# MAIN ACTION CTA %>
-  <div class="flex flex-col items-center mt-2" 
-     data-recording-target="startRecordingWrapper">
+      <%# MAIN ACTION CTA %>
+      <div class="flex flex-col items-center mt-2" 
+        data-recording-target="startRecordingWrapper">
 
-    <button type="button"
-      id="start-recording"
-      class="w-32 h-32 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
-      data-recording-target="startRecording"
-      data-action="click->recording#start">
+        <button type="button"
+          id="start-recording"
+          class="w-32 h-32 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
+          data-recording-target="startRecording"
+          data-action="click->recording#start">
 
-      <i data-lucide="mic" class="w-12 h-12"></i>
-    </button>
+          <i data-lucide="mic" class="w-12 h-12"></i>
+        </button>
 
-    <p class="text-sm text-[#06231B]/70 mt-5">
-      Tap to start recording
-    </p>
+        <p class="text-sm text-[#06231B]/70 mt-5"
+          data-recording-target="startRecordingText">
+          Tap to start recording
+        </p>
+      </div>
+
+    <%# STOP BUTTON (visible only while recording) %>
+    <div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden" 
+      data-recording-target="stopRecordingWrapper">
+
+      <button type="button"
+        id="stop-recording"
+        class="w-32 h-32 bg-[#C9D2CF] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
+        data-recording-target="stopRecording"
+        data-action="click->recording#stop">
+
+        <i data-lucide="square" class="w-10 h-10 text-[#06231B]"></i>
+      </button>
+
+    </div>
+
+    <%# ANIMATION AND TEXT HERE %>
+    <div data-recording-target="processingWrapper" class="flex flex-col items-center mt-2 hidden">
+
+      <div class="flex x-3 my-4">
+        <span class="loading loading-dots loading-xl bg-[#21A179]"></span>
+      </div>
+
+      <p class="text-sm text-[#06231B]/70">
+        Processing your expense...
+      </p>  
+      
+    </div>
   </div>
-
-<%# STOP BUTTON (visible only while recording) %>
-<div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden" 
-  data-recording-target="stopRecordingWrapper">
-
-  <button type="button"
-    id="stop-recording"
-    class="w-32 h-32 bg-[#C9D2CF] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
-    data-recording-target="stopRecording"
-    data-action="click->recording#stop">
-
-    <i data-lucide="square" class="w-10 h-10 text-[#06231B]"></i>
-  </button>
-
-  <p class="text-sm text-[#06231B]/70 mt-4">
-    Stop & Save
-  </p>
-</div>
-
-<%# ANIMATION AND TEXT HERE %>
-<div data-recording-target="processingWrapper" class="flex flex-col items-center mt-2 hidden">
-
-  <div class="flex x-3 my-4">
-    <span class="dot-1 w-4 h-4 bg-[#21A179] rounded-full inline-block"></span>
-    <span class="dot-1 w-4 h-4 bg-[#21A179] rounded-full inline-block"></span>
-    <span class="dot-1 w-4 h-4 bg-[#21A179] rounded-full inline-block"></span>
-  </div>
-
-  <p class="text-sm text-[#06231B]/70">
-    Processing your expense...
-  </p>  
-  
-</div>
 
   <%# RECORDING STATUS %>
   <div id="recording-status"

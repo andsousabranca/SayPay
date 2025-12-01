@@ -10,6 +10,7 @@ export default class extends Controller {
     "recordingMessage", 
     "startRecording",
     "startRecordingWrapper",
+    "startRecordingText",
     "stopRecording", 
     "stopRecordingWrapper",
     "processingWrapper",
@@ -71,6 +72,7 @@ export default class extends Controller {
 
       // disable to avoid double clicks
       this.startRecordingTarget.disabled = true
+      this.startRecordingTextTarget.classList.add("hidden")
       this.showStatus('Initializing microphone...')
 
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true })
@@ -86,7 +88,10 @@ export default class extends Controller {
         this.mediaRecorder.ondataavailable = e => { if (e.data.size > 0) this.chunks.push(e.data) }
         this.mediaRecorder.onstop = () => {
           // hiding the buttons
+          this.stopRecordingTarget.disabled = true
+          this.startRecordingTarget.disabled = true
           this.stopRecordingWrapperTarget.classList.add("hidden")
+          this.startRecordingWrapperTarget.classList.add("hidden")
           this.processingWrapperTarget.classList.remove("hidden")
 
           // process recording
@@ -99,9 +104,6 @@ export default class extends Controller {
           dt.items.add(file)
           this.fileInputTarget.files = dt.files
 
-          // prevent additional interactions and submit
-          this.stopRecordingTarget.disabled = true
-          this.startRecordingTarget.disabled = true
           this.formTarget.submit()
         }
 
