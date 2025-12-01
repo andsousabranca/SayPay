@@ -13,6 +13,9 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
 
+    # Unsplash Image fetch
+    @trip.url = UnsplashService.new("#{@trip.country}").call.first.urls.raw
+
     if @trip.save
       # redirect_to trips_path
       redirect_to  new_trip_expense_path(@trip)

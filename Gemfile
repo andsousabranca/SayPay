@@ -91,3 +91,6 @@ gem "kramdown-parser-gfm"
 
 # Syntax highlighting
 gem "rouge"
+
+# Unsplash for images API Calling
+gem 'unsplash'

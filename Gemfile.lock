@@ -110,6 +110,7 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.5)
     crass (1.0.6)
+    csv (3.3.5)
     date (3.5.0)
     debug (1.11.0)
       irb (~> 1.10)
@@ -142,6 +143,10 @@ GEM
       faraday (~> 2.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    httparty (0.23.2)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     httplog (1.7.3)
       rack (>= 2.0)
       rainbow (>= 2.0.0)
@@ -157,6 +162,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.16.0)
+    jwt (2.10.2)
+      base64
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
@@ -186,6 +193,9 @@ GEM
       money (~> 6.13)
       railties (>= 3.0)
     msgpack (1.8.0)
+    multi_json (1.17.0)
+    multi_xml (0.7.2)
+      bigdecimal (~> 3.1)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
     net-http (0.8.0)
@@ -216,6 +226,12 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    oauth2 (1.4.11)
+      faraday (>= 0.17.3, < 3.0)
+      jwt (>= 1.0, < 3.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
     pg (1.6.2)
@@ -336,6 +352,9 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unsplash (2.1.0)
+      httparty (~> 0.16)
+      oauth2 (~> 1)
     uri (1.1.1)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -371,6 +390,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  faraday (~> 2.14)
   httplog
   importmap-rails
   kramdown
@@ -389,6 +409,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  unsplash
   web-console
 
 RUBY VERSION
