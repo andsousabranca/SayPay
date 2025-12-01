@@ -1,55 +1,65 @@
 <%# CONTAINER %>
 <div class="p-6 flex flex-col items-center" data-controller="recording">
-  <div></div>
 
-  <%# TRIP BANNER %>
-  <div class="w-full bg-white rounded-xl shadow-sm p-4 mb-8 flex items-center gap-4">
-    <%# Country Image or Flag %>
-    <%= image_tag "https://miro.medium.com/0*lm35oJDt_4ZS11tT.jpeg", class: "w-14 h-14 rounded-lg object-cover" %>
-
-    <div class="flex-1">
-      <h2 class="text-lg font-semibold text-[#06231B]">
-        <%= @trip.country %>
-      </h2>
-
-      <p class="text-sm text-[#06231B]/60">
-        22nd November to 30th November
-      </p>
-
-      <p class="text-sm text-[#06231B]/60 mt-1">
-        Total spent: <span class="font-semibold text-[#06231B]">€1000</span>
-      </p>
-    </div>
+  <%# BACK BUTTON %>
+  <div class="w-full flex items-center mb-4">
+    <%= link_to trips_path, class: "flex items-center text-[#06231B]/60 hover:text-[#06231B]" do %>
+      <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i>
+      <span class="text-sm">Back to trips</span>
+    <% end %>
   </div>
 
+  <%# TRIP CARD (photo + info combined) %>
+<div class="w-full bg-white rounded-2xl shadow-md overflow-hidden mb-10">
 
-  <%# MAIN ACTION CTA — MIC BUTTON IN CENTER %>
-  <div class="flex flex-col items-center mt-4">
+  <%# Trip Photo %>
+  <%= image_tag @trip.url,
+        class: "w-full h-44 object-cover" %>
+
+  <%# Trip Info %>
+  <div class="p-4">
+    <h2 class="text-xl font-semibold text-[#06231B]">
+      <%= @trip.country %>
+    </h2>
+
+    <p class="text-sm text-[#06231B]/60 mt-1">
+      22nd November to 30th November
+    </p>
+
+    <p class="text-sm text-[#06231B]/60 mt-1">
+      Total spent:
+      <span class="font-semibold text-[#06231B]">€1000</span>
+    </p>
+  </div>
+
+</div>
+
+  <%# MAIN ACTION CTA %>
+  <div class="flex flex-col items-center mt-2">
 
     <button type="button"
       id="start-recording"
-      class="w-28 h-28 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
+      class="w-32 h-32 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
       data-recording-target="startRecording"
       data-action="click->recording#start">
-      <i data-lucide="mic" class="w-10 h-10"></i>
+
+      <i data-lucide="mic" class="w-12 h-12"></i>
     </button>
 
-    <p class="text-sm text-[#06231B]/70 mt-4">
+    <p class="text-sm text-[#06231B]/70 mt-5">
       Tap to start recording
     </p>
   </div>
 
-
   <%# STOP BUTTON (hidden until recording) %>
   <button type="button"
     id="stop-recording"
-    class="mt-6 w-40 bg-gray-400 text-white py-2 rounded-full hidden"
+    class="mt-8 w-48 bg-gray-400 text-white py-3 rounded-full hidden"
     data-recording-target="stopRecording"
     data-action="click->recording#stop"
     disabled>
     Stop & Save
   </button>
-
 
   <%# RECORDING STATUS %>
   <div id="recording-status"
@@ -64,7 +74,6 @@
 
     <span id="recording-message" data-recording-target="recordingMessage"></span>
   </div>
-
 
   <%# HIDDEN FIELDS %>
   <%= form_with model: [@trip, @expense], 
