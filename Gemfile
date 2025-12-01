@@ -94,3 +94,6 @@ gem "rouge"
 
 # Unsplash for images API Calling
 gem 'unsplash'
+
+# All the countries in the world
+gem 'countries', '~> 8.0'

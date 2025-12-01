@@ -1,16 +1,19 @@
 <%# Container %>
 <div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
   <%# Sub title %>
-  <h3 class="text-3xl font-bold mb-10">Create a New Trip</h3>
+  <h3 class="text-3xl font-bold mb-10">New Trip</h3>
 
   <%# Form %>
   <%= form_with(model: @trip, local: true, html: { class: "rounded-lg border border-gray-300 bg-[#F2FFFB] p-6" }) do |f| %>
 
     <%# Country %>
     <div>
-      <%= f.label :country, "Country", class: "block text-sm font-medium text-gray-900" %>
-      <%= f.select :country, ["Indonesia", "Vietnam", "Cambodia", "Laos", "Thailand"], { prompt: "Select a country" }, class: "mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" %>
+        <%= f.label :country, "Country", class: "block text-sm font-medium text-gray-900" %>
+        <%= f.select :country, ISO3166::Country.all.map,
+                { prompt: "Select a country" },
+                class: "mt-1 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" %>
     </div>
+
 
     <%# Budget %>
     <div>
