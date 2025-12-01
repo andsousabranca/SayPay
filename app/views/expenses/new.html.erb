@@ -5,7 +5,7 @@
   <%# TRIP BANNER %>
   <div class="w-full bg-white rounded-xl shadow-sm p-4 mb-8 flex items-center gap-4">
     <%# Country Image or Flag %>
-    <%= image_tag "https://miro.medium.com/0*lm35oJDt_4ZS11tT.jpeg", class: "w-14 h-14 rounded-lg object-cover" %>
+    <%= image_tag @trip.url, class: "w-14 h-14 rounded-lg object-cover" %>
 
     <div class="flex-1">
       <h2 class="text-lg font-semibold text-[#06231B]">
@@ -67,10 +67,10 @@
 
 
   <%# HIDDEN FIELDS %>
-  <%= form_with model: [@trip, @expense], 
-    data: { recording_target: "form" }, 
-    id: "recording-form", 
-    local: true, 
+  <%= form_with model: [@trip, @expense],
+    data: { recording_target: "form" },
+    id: "recording-form",
+    local: true,
     html: { multipart: true } do |f| %>
 
     <%= f.hidden_field :trip_id, value: @trip.id %>
