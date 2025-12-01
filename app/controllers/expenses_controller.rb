@@ -48,7 +48,7 @@ class ExpensesController < ApplicationController
 
   private
 
-    def summarize_exp
+  def summarize_exp
     # Replace with current user!
 
     @user = current_user.id
