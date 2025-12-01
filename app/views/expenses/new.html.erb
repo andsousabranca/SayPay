@@ -1,5 +1,7 @@
 <%# CONTAINER %>
-<div class="p-6 flex flex-col items-center" data-controller="recording">
+<div class="p-6 flex flex-col items-center" 
+  data-controller="recording"
+  data-recording-ping-sound-value="<%= asset_path('happy-message-ping-351298.mp3') %>">
 
   <%# BACK BUTTON %>
   <div class="w-full flex items-center mb-4">
@@ -35,7 +37,8 @@
 </div>
 
   <%# MAIN ACTION CTA %>
-  <div class="flex flex-col items-center mt-2">
+  <div class="flex flex-col items-center mt-2" 
+     data-recording-target="startRecordingWrapper">
 
     <button type="button"
       id="start-recording"
@@ -51,15 +54,24 @@
     </p>
   </div>
 
-  <%# STOP BUTTON (hidden until recording) %>
+<%# STOP BUTTON (visible only while recording) %>
+<div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden" 
+  data-recording-target="stopRecordingWrapper">
+
   <button type="button"
     id="stop-recording"
-    class="mt-8 w-48 bg-gray-400 text-white py-3 rounded-full hidden"
+    class="w-32 h-32 bg-[#C9D2CF] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
     data-recording-target="stopRecording"
-    data-action="click->recording#stop"
-    disabled>
-    Stop & Save
+    data-action="click->recording#stop">
+
+    <i data-lucide="square" class="w-10 h-10 text-[#06231B]"></i>
   </button>
+
+  <p class="text-sm text-[#06231B]/70 mt-4">
+    Stop & Save
+  </p>
+</div>
+
 
   <%# RECORDING STATUS %>
   <div id="recording-status"

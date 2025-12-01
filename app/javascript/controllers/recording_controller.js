@@ -3,7 +3,20 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="recording"
 export default class extends Controller {
 
-  static targets = [ "form", "recordingStatus", "recordingDot", "recordingMessage", "startRecording", "stopRecording", "fileInput" ]
+  static targets = [ 
+    "form", 
+    "recordingStatus", 
+    "recordingDot", 
+    "recordingMessage", 
+    "startRecording",
+    "startRecordingWrapper",
+    "stopRecording", 
+    "stopRecordingWrapper",
+    "fileInput" ]
+
+  static values = {
+    pingSound: String
+  }
 
   mediaRecorder = null
   stream = null
@@ -14,6 +27,10 @@ export default class extends Controller {
   MAX_MS = 60_000 // 60 seconds
 
   mimeCandidates = ['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/mp4','audio/wav']
+
+  connect() {
+    this.pingSound = new Audio(this.pingSoundValue)
+  }
 
   supportedMime() {
     if (!window.MediaRecorder) return ''
@@ -39,8 +56,8 @@ export default class extends Controller {
   resetUIAfterStop() {
     // re-enable and reset buttons/UI after form submits or stop
     this.startRecordingTarget.disabled = false
-    this.startRecordingTarget.classList.remove('hidden')
-    this.stopRecordingTarget.classList.add('hidden')
+    this.startRecordingWrapperTarget.classList.remove('hidden')
+    this.stopRecordingWrapperTarget.classList.add('hidden')
     this.stopRecordingTarget.disabled = true
     this.hideStatus()
     chunks = []
@@ -83,9 +100,14 @@ export default class extends Controller {
         }
 
         this.mediaRecorder.start()
+
+        // start playing ping sound to indicate recording started
+        this.pingSound.currentTime = 0
+        this.pingSound.play()
+
         // UI switch to actual recording state
-        this.startRecordingTarget.classList.add('hidden')
-        this.stopRecordingTarget.classList.remove('hidden')
+        this.startRecordingWrapperTarget.classList.add('hidden')
+        this.stopRecordingWrapperTarget.classList.remove('hidden')
         this.stopRecordingTarget.disabled = false
         this.showStatus('Recording — Speak now', true)
 

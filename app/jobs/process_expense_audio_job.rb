@@ -70,7 +70,7 @@ class ProcessExpenseAudioJob < ApplicationJob
 
       transcription = nil
 
-      transcription = RubyLLM.transcribe(
+      # transcription = RubyLLM.transcribe(
         tempfile.path,
         model: "gpt-4o-mini-transcribe",
         prompt: TRANSCRIPTION_PROMPT,
@@ -80,7 +80,7 @@ class ProcessExpenseAudioJob < ApplicationJob
 
       expense.update!(audio_transcript: transcription.text) # add text
 
-      @ruby_llm_chat = RubyLLM.context do |config|
+      # @ruby_llm_chat = RubyLLM.context do |config|
         config.openai_api_key = ENV['GITHUB_TOKEN']
         config.openai_api_base = "https://models.inference.ai.azure.com"
       end
