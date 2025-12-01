@@ -11,7 +11,7 @@
     <% @trips.each do |trip| %>
       <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-64 mb-5 rounded-xl") do %>
         <figure>
-          <%=image_tag(trip.url, class: "rounded-xl")%>
+          <%=image_tag(trip.url, class: "rounded-xl object-cover w-full h-52")%>
         </figure>
         <div class="flex p-5 justify-around">
           <h2 class="card-title"><%=trip.country%></h2>
