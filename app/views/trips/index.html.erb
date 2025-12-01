@@ -10,18 +10,25 @@
 <%# Container %>
 <div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
 
-  <h2 class="font-bold"><%= @title%></h2>
+  <div class="text-center">
+    <h2 class="font-bold mb-5"><%= @title%></h2>
+  </div>
 
   <%# Iterating through all the trips %>
-  <ul>
+  <div id="cards" class="grid grid-cols-1 justify-items-center">
+    <%# new %>
     <% @trips.each do |trip| %>
-      <%# Each trip links to the creating a new voice record %>
-    <li class="my-4">
-        <%= link_to trip.country, new_trip_expense_path(trip),
-          class: "block border p-4 rounded-md text-center bg-blue-500 text-white" %>
-      </li>
+      <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-64 mb-5 rounded-xl") do %>
+        <figure>
+          <%=image_tag(trip.url, class: "rounded-xl")%>
+        </figure>
+        <div class="flex p-5 justify-around">
+          <h2 class="card-title"><%=trip.country%></h2>
+          <p>details</p>
+        </div>
+      <%end%>
     <% end %>
-  </ul>
+  </div>
 
   <%# Button that redirects to the new trip page %>
   <div class="flex justify-end">
