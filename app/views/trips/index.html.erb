@@ -13,9 +13,12 @@
         <figure>
           <%=image_tag(trip.url, class: "rounded-xl")%>
         </figure>
-        <div class="flex p-5 justify-around">
-          <h2 class="card-title"><%=trip.country%></h2>
-          <p>details</p>
+        <div class="flex py-2 justify-around">
+          <h2 class="object-top font-semibold"><%=trip.country%></h2>
+          <div class="text-right italic">
+            <p>from: <%= trip.start_date.strftime("%d-%m-%y") if trip.start_date %></p>
+            <p>to: <%= trip.end_date.strftime("%d-%m-%y") if trip.end_date %></p>
+          </div>
         </div>
       <%end%>
     <% end %>
