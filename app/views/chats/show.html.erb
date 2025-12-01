@@ -1,10 +1,17 @@
 <%# Subscribing the client to a channel%>
 <%= turbo_stream_from @chat %>
 
-<div class="max-w-[390px] h-[calc(100vh-4rem)] border flex flex-col">
+<%# LOGO %>
+<div class="flex justify-between my-10 mx-3">
+  <h1 class="text-5xl font-semibold text-white">SayPay</h1>
+  <%= link_to "#", class: "p-3 rounded-full bg-[#21A179] text-white flex items-center justify-center" do %>
+  <%# <i data-lucide="ellipsis-vertical"></i> %>
+  <i data-lucide="text-align-justify"></i>
+  <% end %>
+</div>
 
-  <%# SayPay Logo %>
-  <h1 class="text-5xl font-bold mb-4">SayPay</h1>
+  <%# Container %>
+  <div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex flex-grow flex-col">
 
   <%# Messages %>
   <div id ="messages" class="p-6 flex-1 overflow-auto">
@@ -12,7 +19,7 @@
   </div>
 
   <%# Chatbox  %>
-  <div id="new_message_container" class="chat-area flex flex-col border rounded m-2 p-2 bg-[#DDF8F0]">
+  <div id="new_message_container" class="chat-area flex flex-col border rounded-xl m-2 p-2 bg-[#DDF8F0]">
      <%= render "messages/form", chat: @chat, message: @message %>
   </div>
 </div>
