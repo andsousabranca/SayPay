@@ -17,7 +17,11 @@
       </p>
 
       <p class="text-sm text-[#06231B]/60 mt-1">
-        Total spent: <span class="font-semibold text-[#06231B]">€1000</span>
+        Budget: <span class="font-semibold text-[#06231B]"><%= @trip.budget%> $</span>
+      </p>
+
+      <p class="text-sm text-[#06231B]/60 mt-1">
+        Total spent: <span class="font-semibold text-[#06231B]"> 55 $ </span>
       </p>
     </div>
   </div>
@@ -67,10 +71,10 @@
 
 
   <%# HIDDEN FIELDS %>
-  <%= form_with model: [@trip, @expense], 
-    data: { recording_target: "form" }, 
-    id: "recording-form", 
-    local: true, 
+  <%= form_with model: [@trip, @expense],
+    data: { recording_target: "form" },
+    id: "recording-form",
+    local: true,
     html: { multipart: true } do |f| %>
 
     <%= f.hidden_field :trip_id, value: @trip.id %>
