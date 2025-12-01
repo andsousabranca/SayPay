@@ -5,9 +5,14 @@
     <h2 class="font-bold mb-5"><%= @title%></h2>
   </div>
 
-  <%# Iterating through all the trips %>
   <div id="cards" class="grid grid-cols-1 justify-items-center">
-    <%# new %>
+  <%if @trips.any?%>
+    <%# Iterating through all the trips %>
+    <%= link_to(new_trip_path, class: "flex justify-center border border-dashed shadow-md p-2 w-64 mb-5 rounded-xl") do%>
+      <i data-lucide="plus" class="w-10 h-10 border rounded-full text-white bg-[#21A179]"></i>
+    <%end%>
+
+    <%# Iteration through all the trips %>
     <% @trips.each do |trip| %>
       <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-64 mb-5 rounded-xl") do %>
         <figure>
@@ -18,14 +23,18 @@
           <p>details</p>
         </div>
       <%end%>
-    <% end %>
-  </div>
+    <%end%>
 
+  <%else%>
   <%# Button that redirects to the new trip page %>
-  <div class="flex justify-end">
-    <%= link_to new_trip_path, class: "p-3 rounded-full bg-[#DDF8F0] border text-green flex items-center justify-center" do %>
-    <i data-lucide="plus" class="w-6 h-6"></i>
-    <% end %>
+    <%= link_to(new_trip_path, class: "shadow-md p-2 w-64 mb-5 rounded-xl bg-[#DDF8F0]") do%>
+      <div class="flex justify-center p-5 border border-dashed rounded-xl">
+        <i data-lucide="plus" class="w-10 h-10 border rounded-full text-white bg-[#21A179]"></i>
+      </div>
+      <p>- Create a trip</p>
+      <p>- Track your expenses!</p>
+    <%end%>
+  <%end%>
   </div>
 
 </div>
