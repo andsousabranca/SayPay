@@ -45,7 +45,7 @@
 
         <%# Dropdown list of currency options %>
         <div
-          class="absolute z-50 mt-1 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
+          class="absolute z-50 bottom-full mb-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
           data-searchable-select-target="list">
 
           <% Money::Currency.all.each do |cur| %>
@@ -81,9 +81,9 @@
           data-action="input->searchable-select#filter click->searchable-select#toggleList"
         >
 
-        <%# Dropdown list of currency options %>
+        <%# Dropdown list of category options %>
         <div
-          class="absolute z-50 mt-1 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
+          class="absolute z-50 bottom-full mb-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
           data-searchable-select-target="list">
 
           <% Expense::CATEGORIES.each do |cat| %>
