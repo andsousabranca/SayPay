@@ -7,7 +7,7 @@
   <div class="w-full flex items-center mb-4">
     <%= link_to trips_path, class: "flex items-center text-[#06231B]/60 hover:text-[#06231B]" do %>
       <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i>
-      <span class="text-sm">Back to trips</span>
+      <span class="text-sm">Change trip</span>
     <% end %>
   </div>
 
@@ -40,68 +40,60 @@
 
   </div>
 
-  <div class="w-full flex flex-col items-center" style="min-height: 260px;">
+  <%# ACTION ZONE (fixes layout shift) %>
+  <div class="w-full flex flex-col items-center justify-center min-h-[260px]">
 
-      <%# MAIN ACTION CTA %>
-      <div class="flex flex-col items-center mt-2" 
-        data-recording-target="startRecordingWrapper">
+    <%# START STATE %>
+    <div data-recording-target="startRecordingWrapper" class="flex flex-col items-center mt-2">
+      <button type="button"
+        id="start-recording"
+        class="w-32 h-32 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
+        data-recording-target="startRecording"
+        data-action="click->recording#start">
+        <i data-lucide="mic" class="w-12 h-12"></i>
+      </button>
+      <p class="text-sm text-[#06231B]/70 mt-5"
+        data-recording-target="startRecordingText">
+        Tap to start recording
+      </p>
+    </div>
 
-        <button type="button"
-          id="start-recording"
-          class="w-32 h-32 bg-[#21A179] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
-          data-recording-target="startRecording"
-          data-action="click->recording#start">
-
-          <i data-lucide="mic" class="w-12 h-12"></i>
-        </button>
-
-        <p class="text-sm text-[#06231B]/70 mt-5"
-          data-recording-target="startRecordingText">
-          Tap to start recording
-        </p>
-      </div>
-
-    <%# STOP BUTTON (visible only while recording) %>
-    <div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden" 
-      data-recording-target="stopRecordingWrapper">
-
+    <%# STOP STATE %>
+    <div data-recording-target="stopRecordingWrapper" class="flex flex-col items-center mt-2 hidden">
       <button type="button"
         id="stop-recording"
         class="w-32 h-32 bg-[#C9D2CF] text-white rounded-full shadow-lg flex items-center justify-center transition active:scale-95"
         data-recording-target="stopRecording"
         data-action="click->recording#stop">
-
         <i data-lucide="square" class="w-10 h-10 text-[#06231B]"></i>
       </button>
-
+      <p class="text-sm text-[#06231B]/70 mt-4">Stop & Save</p>
     </div>
 
-    <%# ANIMATION AND TEXT HERE %>
+    <%# PROCESSING STATE %>
     <div data-recording-target="processingWrapper" class="flex flex-col items-center mt-2 hidden">
-
-      <div class="flex x-3 my-4">
+      <div class="flex space-x-3 my-4">
         <span class="loading loading-dots loading-xl bg-[#21A179]"></span>
       </div>
-
       <p class="text-sm text-[#06231B]/70">
         Processing your expense...
-      </p>  
-      
+      </p>
     </div>
-  </div>
 
-  <%# RECORDING STATUS %>
-  <div id="recording-status"
-    class="mt-4 text-[#06231B]/80 text-sm hidden flex items-center gap-2"
-    aria-live="polite"
-    data-recording-target="recordingStatus">
+    <%# RECORDING STATUS %>
+    <div id="recording-status"
+      class="mt-4 text-[#06231B]/80 text-sm hidden flex items-center gap-2"
+      aria-live="polite"
+      data-recording-target="recordingStatus">
 
-    <span id="recording-dot"
-      class="w-3 h-3 rounded-full bg-red-600 animate-pulse hidden"
-      data-recording-target="recordingDot">
-    </span>
+      <span id="recording-dot"
+        class="w-3 h-3 rounded-full bg-red-600 animate-pulse hidden"
+        data-recording-target="recordingDot">
+      </span>
 
-    <span id="recording-message" data-recording-target="recordingMessage"></span>
+      <span id="recording-message" data-recording-target="recordingMessage"></span>
+    </div>
+
   </div>
 
   <%# HIDDEN FIELDS %>

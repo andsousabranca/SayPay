@@ -1,34 +1,111 @@
-<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
+<div class="bg-[#F2FFFB] rounded-t-2xl p-6 flex-grow">
 
-  <%# This page should show the expenses and ensure that people can confirm and update them %>
-  <h1 class="font-bold text-2xl mb-4">Edit your expense</h1>
+  <h1 class="font-bold text-2xl text-[#06231B] mb-6">
+    Review your expense
+  </h1>
 
-  <%# SHOW CURRENCY IN REAL DECIMALS; AND CURRENCY AMONG THE POSSIBLE ONES %>
-  <%# change currencies to readable %>
+  <div class="bg-white rounded-2xl shadow-md p-6 space-y-5">
 
-  <%= form_with model: [@trip, @expense], local: true do |f| %>
-    <div class="space-y-4">
-      <div>
-        <%= f.label :local_amount, "Amount:", class: "block font-medium" %>
-        <%= f.number_field :local_amount, 
-          step: "0.01",
-          value: (@expense.local_amount&.to_f || nil),
-          class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
-      </div>
+    <p class="text-sm text-[#06231B]/60 mb-2">
+      SayPay extracted these details from your recording.  
+      Adjust them if needed.
+    </p>
+
+    <%= form_with model: [@trip, @expense], local: true do |f| %>
+
+      <%# <%= render "shared/error_messages", resource: @expense %>
       
+      <!-- AMOUNT -->
       <div>
-        <%= f.label :local_amount_currency, "Currency:", class: "block font-medium" %>
-        <%= f.text_field :local_amount_currency, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+        <%= f.label :local_amount, "Amount", class: "block text-sm font-medium text-[#06231B] mt-4" %>
+        <%= f.number_field :local_amount,
+              step: "0.01",
+              value: @expense.local_amount&.to_f,
+              class: "w-full mt-1 px-4 py-3 bg-[#F7FAF9] border border-[#E6ECEA] rounded-xl focus:ring-[#21A179] focus:border-[#21A179] text-[#06231B] shadow-sm" %>
       </div>
 
-      <div>
-        <%= f.label :category, "Category:", class: "block font-medium" %>
-        <%= f.select :category, Expense::CATEGORIES, { include_blank: "Select a category" }, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+      <!-- CURRENCY -->
+      <div data-controller="searchable-select" class="relative w-full">
+
+        <%# Hidden field that will be submitted to Rails %>
+        <%= f.label :local_amount_currency, "Currency", class: "block text-sm font-medium text-[#06231B] mt-4" %>
+        <%= f.hidden_field :local_amount_currency,
+              data: { "searchable-select-target": "hiddenField" } %>
+
+        <%# Search box that the user types into %>
+        <input
+          type="text"
+          placeholder="Search currency..."
+          value="<%= @expense.local_amount_currency %>"
+          class="w-full mt-1 px-4 py-3 bg-[#F7FAF9] border border-[#E6ECEA] rounded-xl
+                focus:ring-[#21A179] focus:border-[#21A179] text-[#06231B]"
+          data-searchable-select-target="search"
+          data-action="input->searchable-select#filter click->searchable-select#toggleList"
+        >
+
+        <%# Dropdown list of currency options %>
+        <div
+          class="absolute z-50 mt-1 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
+          data-searchable-select-target="list">
+
+          <% Money::Currency.all.each do |cur| %>
+            <div
+              class="px-4 py-2 text-[#06231B] hover:bg-[#F2FFFB] cursor-pointer"
+              data-action="click->searchable-select#select"
+              data-value="<%= cur.iso_code %>">
+
+              <%= "#{cur.iso_code} — #{cur.name}" %>
+            </div>
+          <% end %>
+
+
+        </div>
       </div>
 
-      <div>
-        <%= f.submit "Confirm Expense", class: "btn bg-blue-600 text-white" %>
+      <!-- CATEGORIES -->
+      <div data-controller="searchable-select" class="relative w-full">
+
+        <%# Hidden field that will be submitted to Rails %>
+        <%= f.label :category, "Category", class: "block text-sm font-medium text-[#06231B] mt-4" %>
+        <%= f.hidden_field :category,
+              data: { "searchable-select-target": "hiddenField" } %>
+
+        <%# Search box that the user types into %>
+        <input
+          type="text"
+          placeholder="Search category..."
+          value="<%= @expense.category %>"
+          class="w-full mt-1 px-4 py-3 bg-[#F7FAF9] border border-[#E6ECEA] rounded-xl
+                focus:ring-[#21A179] focus:border-[#21A179] text-[#06231B]"
+          data-searchable-select-target="search"
+          data-action="input->searchable-select#filter click->searchable-select#toggleList"
+        >
+
+        <%# Dropdown list of currency options %>
+        <div
+          class="absolute z-50 mt-1 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
+          data-searchable-select-target="list">
+
+          <% Expense::CATEGORIES.each do |cat| %>
+            <div
+              class="px-4 py-2 text-[#06231B] hover:bg-[#F2FFFB] cursor-pointer"
+              data-action="click->searchable-select#select"
+              data-value="<%= cat %>">
+              <%= cat %>
+            </div>
+          <% end %>
+
+
+        </div>
       </div>
-    </div>
-  <% end %>
+
+      <!-- SUBMIT BUTTON -->
+      <div class="pt-4">
+        <%= f.submit "Confirm Expense",
+              class: "w-full bg-[#21A179] text-white py-3 rounded-full font-semibold text-base hover:bg-[#1b8a67] transition" %>
+      </div>
+
+    <% end %>
+
+  </div>
 </div>

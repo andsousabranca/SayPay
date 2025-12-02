@@ -27,16 +27,18 @@ class Expense < ApplicationRecord
   monetize :base_amount_cents
 
   attribute :category, :string, default: nil
-  # attribute :local_currency, :string, default: nil
 
   # allow nil values
   validates :category, inclusion: { in: CATEGORIES }, allow_blank: true
 
-  # validate that currency is a valid ISO currency code
-  # validates :local_currency, inclusion: { in: VALID_CURRENCIES }, allow_blank: true
-
   # validate acceptable audio file types
   validate :acceptable_audio
+
+  # validate base and local amount
+  # validates :local_amount_cents, numericality: { greater_than: 0 }
+  # validates :base_amount_cents, numericality: { greater_than: 0 }
+
+  # validates :local_amount_currency, inclusion: { in: VALID_CURRENCIES }
 
   # TODO: check that audio file is maximum 1 min long
 

@@ -1,0 +1,7 @@
+<% if resource.errors.any? %>
+  <div class="bg-red-100 text-red-700 p-3 rounded-xl mb-4">
+    <% @expense.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
