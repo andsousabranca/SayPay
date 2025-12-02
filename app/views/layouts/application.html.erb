@@ -34,7 +34,7 @@
       </header>
 
       <%# MAIN CONTENT (scrolls above navbar) %>
-      <main class="flex-1 overflow-y-auto bg-[#F2FFFB] rounded-t-2xl">
+      <main class="flex-1 overflow-y-auto bg-[#F2FFFB] rounded-t-2xl pb-20">
         <%= yield %>
       </main>
 
@@ -45,7 +45,7 @@
 
     </div>
 
-  <% else %> 
+  <% else %>
     <%# HOME PAGE (no header, no navbar) %>
     <%= yield %>
   <% end %>

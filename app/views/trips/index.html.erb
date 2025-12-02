@@ -1,20 +1,20 @@
 <%# Container %>
-<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
+<div class="bg-[#F2FFFB] rounded-t-2xl p-6 flex-grow">
 
-  <div class="text-center">
-    <h2 class="font-bold mb-5"><%= @title%></h2>
+  <div class="text-left">
+    <h2 class="font-bold mb-5 text-3xl">Trips</h2>
   </div>
 
   <div id="cards" class="grid grid-cols-1 justify-items-center">
   <%if @trips.any?%>
     <%# Iterating through all the trips %>
-    <%= link_to(new_trip_path, class: "flex justify-center border border-dashed shadow-md p-2 w-64 mb-5 rounded-xl") do%>
+    <%= link_to(new_trip_path, class: "flex justify-center border border-dashed shadow-md p-2 w-full mb-5 rounded-xl") do%>
       <i data-lucide="plus" class="w-10 h-10 border rounded-full text-white bg-[#21A179]"></i>
     <%end%>
 
     <%# Iteration through all the trips %>
     <% @trips.each do |trip| %>
-      <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-64 mb-5 rounded-xl") do %>
+      <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-full mb-5 rounded-xl") do %>
         <figure>
           <%=image_tag(trip.url, class: "rounded-xl object-cover w-full h-52")%>
         </figure>
