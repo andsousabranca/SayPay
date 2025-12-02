@@ -4,11 +4,29 @@ class ExpensesController < ApplicationController
     @expenses = Expense.all
     @trips = Trip.all
     @summary = summarize_exp
+
+    # Expenses Pie Chart
+    @expenses_by_category = Expense.group(:category).sum("base_amount_cents / 100.0")
+    # Category Column Chart
+    @amount_by_category = Expense.group(:category).count
+
+    # Spending per country line chart
+    @spending_per_country = Trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+
+    # Aggregate spending by day
+    @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
+      date.strftime("%d %B")
+    end
+
   end
 
   def new
     @expense = Expense.new
     @trip = Trip.find(params[:trip_id])
+
+    @trips = Trip.all
+    @expenses = Expense.all
+    @summary = summarize_exp
   end
 
   def create

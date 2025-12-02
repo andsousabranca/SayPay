@@ -1,5 +1,5 @@
 <%# CONTAINER %>
-<div class="p-6 flex flex-col items-center" 
+<div class="p-6 flex flex-col items-center"
   data-controller="recording"
   data-recording-ping-sound-value="<%= asset_path('happy-message-ping-351298.mp3') %>">
 
@@ -23,7 +23,7 @@
     <h2 class="text-xl font-semibold text-[#06231B]">
       <%= @trip.country %>
     </h2>
-    
+
      <p class="text-sm text-[#06231B]/60 mt-1">
       Budget: <span class="font-semibold text-[#06231B]"><%= @trip.budget%> $</span>
      </p>
@@ -34,14 +34,14 @@
 
     <p class="text-sm text-[#06231B]/60 mt-1">
       Total spent:
-      <span class="font-semibold text-[#06231B]">€1000</span>
+      <span class="font-semibold text-[#06231B]"><%=@summary[0] %> € (HARD CODED EUR SIGN)</span>
     </p>
   </div>
 
 </div>
 
   <%# MAIN ACTION CTA %>
-  <div class="flex flex-col items-center mt-2" 
+  <div class="flex flex-col items-center mt-2"
      data-recording-target="startRecordingWrapper">
 
     <button type="button"
@@ -59,7 +59,7 @@
   </div>
 
 <%# STOP BUTTON (visible only while recording) %>
-<div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden" 
+<div id="stop-recording-wrapper" class="flex flex-col items-center mt-2 hidden"
   data-recording-target="stopRecordingWrapper">
 
   <button type="button"
@@ -87,8 +87,8 @@
 
   <p class="text-sm text-[#06231B]/70">
     Processing your expense...
-  </p>  
-  
+  </p>
+
 </div>
 
   <%# RECORDING STATUS %>
