@@ -1,7 +1,9 @@
 <%# LOGO %>
-<div class="flex justify-between my-10 mx-3">
-  <h1 class="text-5xl font-semibold text-white">SayPay</h1>
-   <div class="navbar-end">
+<div class="flex justify-between mt-6 mb-4 mx-3">
+  <h1 class="text-3xl font-semibold text-white">
+    <%= @page_title.presence || "SayPay" %>
+  </h1>
+   <div class="flex-shrink-0">
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle text-white">
         <i data-lucide="text-align-justify"></i>
