@@ -13,7 +13,6 @@ class ExpensesController < ApplicationController
     # Spending per country line chart
     @spending_per_country = Trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
     # @spending_per_country = Expense.group_by_hour_of_day(:created_at).sum(:base_amount_cents)
-
   end
 
   def new

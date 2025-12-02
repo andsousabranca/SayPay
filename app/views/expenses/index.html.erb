@@ -96,17 +96,18 @@
     <ul>
       <% @expenses.each do |expense| %>
       <li class="flex border border-gray-300 rounded-md mb-2 p-2">
-        <div id="logo" class="logo p-2">
-          <p>Logo</p>
-          <p>Flag</p>
+        <div id="logo" class="p-2 border-r">
+          <p><%= ISO3166::Country.find_country_by_any_name(expense.trip.country).alpha2%></p>
+          <hr>
         </div>
+
         <div id="location-date" class="flex-grow p-2">
-          <p>restaurant name</p>
-          <p>date</p>
+          <p><%=expense.category%></p>
+          <p><%= expense.created_at.strftime("%d %B %Y at %-l:%M %p")%></p>
         </div>
         <div id="price-category" class="p-2">
           <p><%=expense.local_amount.format%></p>
-          <p><%=expense.category%></p>
+          <p></p>
         </div>
       </li>
 
