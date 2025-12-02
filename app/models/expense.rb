@@ -41,6 +41,10 @@ class Expense < ApplicationRecord
   # validates :local_amount_currency, inclusion: { in: VALID_CURRENCIES }
 
   # TODO: check that audio file is maximum 1 min long
+  
+  def calculate_base_amount
+    CurrencyConversionJob.perform_later(self)
+  end
 
   private
 

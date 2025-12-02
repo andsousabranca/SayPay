@@ -97,3 +97,6 @@ gem 'unsplash'
 
 # All the countries in the world
 gem 'countries', '~> 8.0'
+
+# To run background jobs
+gem "solid_queue"

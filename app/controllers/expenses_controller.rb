@@ -39,6 +39,7 @@ class ExpensesController < ApplicationController
     @trip = @expense.trip
 
     if @expense.update(expense_params.except(:audio))
+      @expense.calculate_base_amount
       redirect_to new_trip_expense_path(@trip), notice: "Expense updated successfully."
     else
       flash.now[:alert] = @expense.errors.full_messages.to_sentence
