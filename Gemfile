@@ -97,3 +97,7 @@ gem 'unsplash'
 
 # All the countries in the world
 gem 'countries', '~> 8.0'
+
+# Gem that help building charts
+gem 'chartkick'
+gem 'groupdate'

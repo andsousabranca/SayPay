@@ -4,6 +4,16 @@ class ExpensesController < ApplicationController
     @expenses = Expense.all
     @trips = Trip.all
     @summary = summarize_exp
+
+    # Expenses Pie Chart
+    @expenses_by_category = Expense.group(:category).sum("base_amount_cents / 100.0")
+    # Category Column Chart
+    @amount_by_category = Expense.group(:category).count
+
+    # Spending per country line chart
+    @spending_per_country = Trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+    # @spending_per_country = Expense.group_by_hour_of_day(:created_at).sum(:base_amount_cents)
+
   end
 
   def new
