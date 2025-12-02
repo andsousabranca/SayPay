@@ -5,17 +5,20 @@
   <div id="exp-summary" class="border border-gray-300 rounded-md mb-5 bg-[#DDF8F0] p-2">
     <h3 class="mb-3 text-md font-bold">Overview:</h3>
     <div class="flex justify-between">
-      <div>
-        <p class="text-center"><%=@summary[0]%> € (HARD CODED EUR SIGN)</p>
-        <p>total spent</p>
+      <div class="text-center">
+        <i class="w-full" data-lucide="dollar-sign"></i>
+        <p><%= @summary[0] %> €</p>
+        <p class="italic">total spent</p>
       </div>
       <div>
+        <i class="w-full" data-lucide="wallet"></i>
         <p class="text-center"><%=@summary[1]%> €</p>
-        <p>Remaining</p>
+        <p class="italic" >Remaining</p>
       </div>
       <div>
+        <i class="w-full" data-lucide="arrow-left-right"></i>
         <p class="text-center"><%=@summary[2]%></p>
-        <p>Transactions</p>
+        <p class="italic" >Transactions</p>
       </div>
     </div>
   </div>
