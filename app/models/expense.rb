@@ -43,7 +43,7 @@ class Expense < ApplicationRecord
   # TODO: check that audio file is maximum 1 min long
   
   def calculate_base_amount
-    CurrencyConversionJob.perform_later(self)
+    CurrencyConversionJob.perform_now(self)
   end
 
   private
