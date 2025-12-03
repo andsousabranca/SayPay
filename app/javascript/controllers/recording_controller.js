@@ -35,11 +35,23 @@ export default class extends Controller {
   }
 
   supportedMime() {
-    if (!window.MediaRecorder) return ''
-    for (const c of this.mimeCandidates) {
-      try { if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c)) return c } catch(e) {}
+    const ua = navigator.userAgent.toLowerCase()
+    const isSafari = ua.includes("safari") && !ua.includes("chrome")
+
+    // Safari to use MP4 or WAV, never WEBM which leads to errors
+    if (isSafari) {
+      if (MediaRecorder.isTypeSupported("audio/mp4")) return "audio/mp4"
+      if (MediaRecorder.isTypeSupported("audio/wav")) return "audio/wav"
+      return ""
     }
-    return ''
+
+    // For Chrome, Firefox and Android
+    if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) return "audio/webm;codecs=opus"
+    if (MediaRecorder.isTypeSupported("audio/ogg;codecs=opus"))  return "audio/ogg;codecs=opus"
+    if (MediaRecorder.isTypeSupported("audio/mp4")) return "audio/mp4"
+    if (MediaRecorder.isTypeSupported("audio/wav")) return "audio/wav"
+
+    return ""
   }
 
   showStatus(msg, showDot = false) {
@@ -95,7 +107,8 @@ export default class extends Controller {
           this.processingWrapperTarget.classList.remove("hidden")
 
           // process recording
-          const blob = new Blob(this.chunks, { type: this.chunks[0]?.type || 'audio/webm' })
+          const blobType = this.chunks[0]?.type || this.supportedMime() || 'audio/mp4'
+          const blob = new Blob(this.chunks, { type: blobType })
           this.chunks = []
 
           const ext = blob.type.split('/').shift() === 'audio' ? blob.type.split('/').pop().split(';')[0] : 'webm'

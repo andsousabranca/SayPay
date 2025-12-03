@@ -1,38 +1,59 @@
 <% @page_title = "My trips" %>
 <%# Container %>
 <div class="bg-[#F2FFFB] rounded-t-2xl p-6 flex-grow">
-
-  <div id="cards" class="grid grid-cols-1 justify-items-center">
-  <%if @trips.any?%>
-    <%# Iterating through all the trips %>
-    <%= link_to(new_trip_path, class: "flex justify-center border border-dashed shadow-md p-2 w-full mb-5 rounded-xl") do%>
-      <i data-lucide="plus" class="w-10 h-10 border rounded-full text-white bg-[#21A179]"></i>
-    <%end%>
-
-    <%# Iteration through all the trips %>
-    <% @trips.each do |trip| %>
-      <%= link_to(new_trip_expense_path(trip), class: "border border-gray-200 shadow-md p-2 w-full mb-5 rounded-xl") do %>
-        <figure>
-          <%=image_tag(trip.url, class: "rounded-xl object-cover w-full h-52")%>
-        </figure>
-        <div class="flex py-2 justify-around">
-          <h2 class="object-top font-semibold"><%=trip.country%></h2>
-          <div class="text-right italic">
-            <p>from: <%= trip.start_date.strftime("%d-%m-%y") if trip.start_date %></p>
-            <p>to: <%= trip.end_date.strftime("%d-%m-%y") if trip.end_date %></p>
+  <div id="cards" class="grid grid-cols-1 justify-items-center max-w-md mx-auto gap-5">
+    <%if @trips.any?%>
+      <%# Iterating through all the trips %>
+      <%= link_to new_trip_path,
+          class: "w-full bg-white rounded-2xl shadow-md overflow-hidden mb-4 border border-dashed border-[#C9D2CF]" do %>
+        <div class="p-6 flex flex-col items-center">
+          <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#21A179] text-white mb-2">
+            <i data-lucide="plus" class="w-6 h-6"></i>
           </div>
+          <p class="text-sm text-[#06231B]/70">Add a new trip</p>
         </div>
-      <%end%>
-    <%end%>
+      <% end %>
 
-  <%else%>
-  <%# Button that redirects to the new trip page %>
-    <%= link_to(new_trip_path, class: "shadow-md p-2 w-64 mb-5 rounded-xl bg-[#DDF8F0]") do%>
-      <div class="flex justify-center p-5 border border-dashed rounded-xl">
-        <i data-lucide="plus" class="w-10 h-10 border rounded-full text-white bg-[#21A179]"></i>
+      <%# Iteration through all the trips %>
+      <% @trips.each do |trip| %>
+        <%= link_to new_trip_expense_path(trip),
+            class: "w-full bg-white rounded-2xl shadow-md overflow-hidden block" do %>
+
+          <%# Trip photo – same idea as recording page %>
+          <%= image_tag trip.url,
+                class: "w-full h-32 object-cover" %>
+
+          <%# Trip info – similar to recording card %>
+          <div class="p-3 flex items-start justify-between">
+            <div>
+              <h2 class="text-lg font-semibold text-[#06231B]">
+                <%= trip.country %>
+              </h2>
+
+              <% if trip.start_date && trip.end_date %>
+                <p class="text-xs text-[#06231B]/60 mt-1">
+                  <%= "from #{trip.start_date.strftime('%d %b')} to #{trip.end_date.strftime('%d %b %y')}" %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+
+        <% end %>
+      <% end %>
+
+    <% else %>
+      <div class="max-w-md mx-auto">
+        <%= link_to new_trip_path,
+            class: "w-full bg-white rounded-2xl shadow-md overflow-hidden border border-dashed border-[#C9D2CF] block" do %>
+          <div class="p-6 flex flex-col items-center">
+            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#21A179] text-white mb-2">
+              <i data-lucide="plus" class="w-6 h-6"></i>
+            </div>
+            <p class="text-sm text-[#06231B]/70">Start your first trip</p>
+          </div>
+        <% end %>
       </div>
-    <%end%>
-  <%end%>
+    <% end %>
   </div>
 
 </div>

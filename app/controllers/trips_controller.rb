@@ -14,7 +14,10 @@ class TripsController < ApplicationController
     @trip.user_id = current_user.id
 
     # Unsplash Image fetch
-    @trip.url = UnsplashService.new("#{@trip.country}").call.first.urls.raw
+    initial_image_url = UnsplashService.new("#{@trip.country}").call.first.urls.raw
+
+    # reduce the quality of the picture
+    @trip.url = "#{initial_image_url}&q=10"
 
     if @trip.save
       redirect_to new_trip_expense_path(@trip)
