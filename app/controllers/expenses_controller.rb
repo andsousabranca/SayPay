@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
 
     if params[:country].present?
       @trips = Trip.where(user: current_user, country: params[:country])
-      @expenses = Expense.where(user: current_user, trip: @trips)
+      @expenses = Expense.where(trip: @trips)
 
       # Expenses Pie Chart
       @expenses_by_category = @expenses.group(:category).sum("base_amount_cents / 100.0")
@@ -21,8 +21,8 @@ class ExpensesController < ApplicationController
       end
 
     else
-      @expenses = Expense.all.where(user: current_user, )
       @trips = Trip.all.where(user: current_user)
+      @expenses = Expense.all.where(trip: @trips)
 
       # Expenses Pie Chart
       @expenses_by_category = @expenses.group(:category).sum("base_amount_cents / 100.0")
@@ -47,9 +47,8 @@ class ExpensesController < ApplicationController
     @expense = Expense.new
     @trip = Trip.find(params[:trip_id])
 
-    raise
     @trips = Trip.all.where(user: current_user)
-    @expenses = Expense.all.where(user: current_user)
+    @expenses = Expense.all.where(trip: @trip)
     @summary = summarize_exp
 
   end

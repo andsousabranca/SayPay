@@ -9,3 +9,6 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 # Charts
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
+
+# SweetAlert
+pin "sweetalert2" # @11.26.3
