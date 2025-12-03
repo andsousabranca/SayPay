@@ -46,7 +46,13 @@
       </div>
 
     <% else %>
-      <%# HOME PAGE (no header, no navbar) %>
+
+      <%# HEADER %>
+      <header class="fixed top-0 left-0 right-0 z-50 bg-base-100 shadow-sm">
+        <%= render "shared/header_public" %>
+      </header>
+
+      <%# HOME PAGE (no navbar) %>
       <%= yield %>
     <% end %>
 

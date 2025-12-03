@@ -1,0 +1,23 @@
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
+    <%= link_to root_path do %>
+      <%= image_tag "saypay_logo_embedded.svg", alt: "SayPay Logo", class: "h-12 w-auto" %>
+    <% end %>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-ghost" %>
+        </li>
+        <li>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-ghost" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
