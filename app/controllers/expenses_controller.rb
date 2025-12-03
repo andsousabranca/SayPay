@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
 
     if params[:country].present?
       @trips = Trip.where(country: selected_country)
-      @expenses = Expense.where(trip: @selected_trip)
+      @expenses = Expense.where(trip: @trips)
 
       # Expenses Pie Chart
       @expenses_by_category = @expenses.group(:category).sum("base_amount_cents / 100.0")
@@ -15,7 +15,7 @@ class ExpensesController < ApplicationController
       @amount_by_category = @expenses.group(:category).count
 
       # Spending per country line chart
-      @spending_per_country = @selected_trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+      @spending_per_country = @trips.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
 
       # Aggregate spending by day
       @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
@@ -33,7 +33,7 @@ class ExpensesController < ApplicationController
       @amount_by_category = @expenses.group(:category).count
 
       # Spending per country line chart
-      @spending_per_country = @selected_trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+      @spending_per_country = @trips.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
 
       # Aggregate spending by day
       @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
@@ -43,7 +43,6 @@ class ExpensesController < ApplicationController
 
     @filter = Trip.all
     @summary = summarize_exp
-
   end
 
   def new
@@ -112,8 +111,13 @@ class ExpensesController < ApplicationController
       spent += expense.base_amount.fractional
       count += 1
     end
-    remaining -= (spent/100)
-    return (spent/100), remaining, count
+
+    remaining -= spent
+
+    remaining_money = Money.new(remaining, "USD")
+    spent_money = Money.new(spent, "USD")
+
+    return spent_money, remaining_money, count
   end
 
   def expense_params

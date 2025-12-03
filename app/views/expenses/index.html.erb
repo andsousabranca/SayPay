@@ -7,12 +7,12 @@
     <div class="flex justify-between">
       <div class="text-center">
         <i class="w-full" data-lucide="dollar-sign"></i>
-        <p><%= @summary[0] %> €</p>
+        <p><%= @summary[0].format%></p>
         <p class="italic">total spent</p>
       </div>
       <div>
         <i class="w-full" data-lucide="wallet"></i>
-        <p class="text-center"><%=@summary[1]%> €</p>
+        <p class="text-center"><%=@summary[1].format%></p>
         <p class="italic" >Remaining</p>
       </div>
       <div>

@@ -17,8 +17,6 @@ class TripsController < ApplicationController
     @trip.url = UnsplashService.new("#{@trip.country}").call.first.urls.raw
 
     if @trip.save
-      # redirect_to trips_path
-      debugger
       redirect_to new_trip_expense_path(@trip)
     else
       render "new", status: :unprocessable_content
