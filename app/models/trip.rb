@@ -2,6 +2,8 @@ class Trip < ApplicationRecord
   belongs_to :user
   has_many :expenses, dependent: :destroy
 
+  monetize :budget_cents
+
   validates :country, presence: true
 
   # TODO: add a category for countries

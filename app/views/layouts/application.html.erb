@@ -23,32 +23,32 @@
       </script>
 
   </head>
-<body>
+  <body>
 
-  <% if show_nav_and_header? %>
-    <div class="min-h-screen flex flex-col bg-[#21A179]">
+    <% if show_nav_and_header? %>
+      <div class="min-h-screen flex flex-col bg-[#21A179]">
 
-      <%# HEADER %>
-      <header>
-        <%= render "shared/header" %>
-      </header>
+        <%# HEADER %>
+        <header>
+          <%= render "shared/header" %>
+        </header>
 
-      <%# MAIN CONTENT (scrolls above navbar) %>
-      <main class="flex-1 overflow-y-auto bg-[#F2FFFB] rounded-t-2xl pb-20">
-        <%= yield %>
-      </main>
+        <%# MAIN CONTENT (scrolls above navbar) %>
+        <main class="flex-1 overflow-y-auto bg-[#F2FFFB] rounded-t-2xl pb-20">
+          <%= yield %>
+        </main>
 
-      <%# NAVBAR (always visible) %>
-      <nav class="fixed bottom-0 left-0 right-0 bg-white z-50 border-t border-gray-200">
-        <%= render "shared/navbar_logged" %>
-      </nav>
+        <%# NAVBAR (always visible) %>
+        <nav class="fixed bottom-0 left-0 right-0 bg-white z-50 border-t border-gray-200">
+          <%= render "shared/navbar_logged" %>
+        </nav>
 
-    </div>
+      </div>
 
-  <% else %>
-    <%# HOME PAGE (no header, no navbar) %>
-    <%= yield %>
-  <% end %>
+    <% else %>
+      <%# HOME PAGE (no header, no navbar) %>
+      <%= yield %>
+    <% end %>
 
-</body>
+  </body>
 </html>

@@ -1,12 +1,12 @@
 class TripsController < ApplicationController
 
   def index
-    @trips = Trip.all
-    @trips = Trip.order(created_at: :desc)
+    @trips = Trip.all.where(user: current_user).order(created_at: :desc)
   end
 
   def new
     @trip = Trip.new
+    @user = current_user
   end
 
   def create
@@ -18,7 +18,8 @@ class TripsController < ApplicationController
 
     if @trip.save
       # redirect_to trips_path
-      redirect_to  new_trip_expense_path(@trip)
+      debugger
+      redirect_to new_trip_expense_path(@trip)
     else
       render "new", status: :unprocessable_content
     end
@@ -27,6 +28,6 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:country, :budget, :start_date, :end_date)
+    params.require(:trip).permit(:country, :budget, :budget_currency, :start_date, :end_date)
   end
 end
