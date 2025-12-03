@@ -7,30 +7,33 @@
   <% end %>
 
   <%# Dashboard %>
-  <%= link_to expenses_path, class: "flex flex-col items-center btn btn-ghost btn-circle h-auto w-16" do %>
-    <i data-lucide="layout-dashboard"></i>
-    <span class="text-[10px] mt-1 text-[#06231B]/80">Dashboard</span>
-  <% end %>
+  <% if current_user.trips.any? %>
+    <%= link_to expenses_path, class: "flex flex-col items-center btn btn-ghost btn-circle h-auto w-16" do %>
+      <i data-lucide="layout-dashboard"></i>
+      <span class="text-[10px] mt-1 text-[#06231B]/80">Dashboard</span>
+    <% end %>
+  <%else%>
+    <%= link_to trips_path, class: "flex flex-col items-center btn btn-ghost btn-circle h-auto w-16" do %>
+      <i data-lucide="layout-dashboard"></i>
+      <span class="text-[10px] mt-1 text-[#06231B]/80">Dashboard</span>
+    <% end %>
+  <%end%>
 
   <%# Voice Record %>
   <% if current_user.trips.any? %>
-    <%= link_to new_trip_expense_path(current_user.trips.last),
-          class: "flex flex-col items-center btn btn-circle bg-[#21A179] text-white h-auto w-16 py-2" do %>
+    <%= link_to new_trip_expense_path(current_user.trips.last), class: "flex flex-col items-center btn btn-circle bg-[#21A179] text-white h-auto w-16 py-2" do %>
       <i data-lucide="mic"></i>
       <span class="text-[10px] mt-1 text-white/90">Record</span>
     <% end %>
   <% else %>
-    <%= link_to new_trip_path,
-          class: "flex flex-col items-center btn btn-circle bg-[#21A179] text-white h-auto w-16 py-2" do %>
+    <%= link_to new_trip_path, class: "flex flex-col items-center btn btn-circle bg-[#21A179] text-white h-auto w-16 py-2" do %>
       <i data-lucide="mic"></i>
       <span class="text-[10px] mt-1 text-white/90">Record</span>
     <% end %>
   <% end %>
 
   <%# Chat %>
-  <%= link_to chats_path,
-        class: "flex flex-col items-center btn btn-ghost btn-circle h-auto w-16",
-        data: { turbo_method: :post } do %>
+  <%= link_to chats_path, class: "flex flex-col items-center btn btn-ghost btn-circle h-auto w-16", data: { turbo_method: :post } do %>
     <i data-lucide="message-circle"></i>
     <span class="text-[10px] mt-1 text-[#06231B]/80">AI Chat</span>
   <% end %>
