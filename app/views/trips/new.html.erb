@@ -11,13 +11,38 @@
     <%= form_with(model: @trip, local: true) do |f| %>
 
       <%# COUNTRY (searchable later if you want) %>
-      <div>
+      <div data-controller="searchable-select" class="relative w-full">
+
+        <%# Hidden field that will be sumbitted to Rails %>
         <%= f.label :country, "Country", class: "block text-sm font-medium text-[#06231B] mt-4" %>
-        <%= f.select :country,
-              ISO3166::Country.all.map,
-              { prompt: "Select a country" },
-              class: "w-full mt-1 px-4 py-3 bg-[#F7FAF9] border border-[#E6ECEA] rounded-xl 
-                      focus:ring-[#21A179] focus:border-[#21A179] text-[#06231B] shadow-sm" %>
+        <%= f.hidden_field :country,
+            data: { "searchable-select-target": "hiddenField" } %>
+
+        <%# Search box that the user types into %>
+        <input
+          type="text"
+          placeholder="Search a country..."
+          class="w-full mt-1 px-4 py-3 bg-[#F7FAF9] border border-[#E6ECEA] rounded-xl
+                focus:ring-[#21A179] focus:border-[#21A179] text-[#06231B]"
+          data-searchable-select-target="search"
+          data-action="input->searchable-select#filter click->searchable-select#toggleList"
+          >
+
+        <%# Dropdown list of country options %>
+        <div
+          class="absolute z-50 mb-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-60 overflow-y-auto hidden"
+          data-searchable-select-target="list">
+
+          <% ISO3166::Country.all.each do |country| %>
+            <div
+              class="px-4 py-2 text-[#06231B] hover:bg-[#F2FFFB] cursor-pointer"
+              data-action="click->searchable-select#select"
+              data-value="<%= country %>">
+
+              <%= country %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
       <%# BUDGET AMOUNT %>
