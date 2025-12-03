@@ -20,7 +20,7 @@ first_trip = Trip.create!(
   country: "Thailand",
   budget: 400.0,
   user_id: user.id,
-  url: "",
+  url: "https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?ixid=M3w4Mzc4NzN8MHwxfHNlYXJjaHwxfHx0aGFpbGFuZHxlbnwwfHx8fDE3NjQ3MzAwNjh8MA&ixlib=rb-4.1.0&utm_source=SayPay&utm_medium=referral&utm_campaign=api-credit",
   start_date: Date.new(2025, 12, 28),
   end_date: Date.new(2026, 01, 14)
 )
@@ -29,7 +29,7 @@ last_trip = Trip.create!(
   country: "Indonesia",
   budget: 300.0,
   user_id: user.id,
-  url: "",
+  url: "https://images.unsplash.com/photo-1505993597083-3bd19fb75e57?ixid=M3w4Mzc4NzN8MHwxfHNlYXJjaHwxfHxpbmRvbmVzaWF8ZW58MHx8fHwxNzY0NzMwMDk3fDA&ixlib=rb-4.1.0&utm_source=SayPay&utm_medium=referral&utm_campaign=api-credit",
   start_date: Date.new(2025, 12, 14),
   end_date: Date.new(2025, 12, 28)
 )
