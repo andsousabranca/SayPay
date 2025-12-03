@@ -73,6 +73,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_02_072126) do
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
+  create_table "recordings", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_recordings_on_trip_id"
+  end
+
   create_table "solid_cable_messages", force: :cascade do |t|
     t.text "channel"
     t.text "payload"
@@ -234,6 +241,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_02_072126) do
   add_foreign_key "chats", "users"
   add_foreign_key "expenses", "trips"
   add_foreign_key "messages", "chats"
+  add_foreign_key "recordings", "trips"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
