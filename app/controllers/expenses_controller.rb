@@ -1,22 +1,48 @@
 class ExpensesController < ApplicationController
 
   def index
-    @expenses = Expense.all
+
+    selected_country = params[:country]
+
+    if params[:country].present?
+      @selected_trip = Trip.where(country: selected_country)
+      @expenses = Expense.where(trip: @selected_trip)
+
+      # Expenses Pie Chart
+      @expenses_by_category = @expenses.group(:category).sum("base_amount_cents / 100.0")
+
+      # Category Column Chart
+      @amount_by_category = @expenses.group(:category).count
+
+      # Spending per country line chart
+      @spending_per_country = @selected_trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+
+      # Aggregate spending by day
+      @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
+        date.strftime("%d %B")
+      end
+
+    else
+      @expenses = Expense.all
+      @selected_trip = Trip.all
+
+      # Expenses Pie Chart
+      @expenses_by_category = @expenses.group(:category).sum("base_amount_cents / 100.0")
+
+      # Category Column Chart
+      @amount_by_category = @expenses.group(:category).count
+
+      # Spending per country line chart
+      @spending_per_country = @selected_trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
+
+      # Aggregate spending by day
+      @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
+        date.strftime("%d %B")
+      end
+    end
+
     @trips = Trip.all
     @summary = summarize_exp
-
-    # Expenses Pie Chart
-    @expenses_by_category = Expense.group(:category).sum("base_amount_cents / 100.0")
-    # Category Column Chart
-    @amount_by_category = Expense.group(:category).count
-
-    # Spending per country line chart
-    @spending_per_country = Trip.joins(:expenses).group(:country).sum("expenses.base_amount_cents / 100.0")
-
-    # Aggregate spending by day
-    @spending_over_time = @expenses.group_by_day(:created_at).sum("base_amount_cents / 100.0").transform_keys do |date|
-      date.strftime("%d %B")
-    end
 
   end
 
@@ -74,7 +100,7 @@ class ExpensesController < ApplicationController
 
     remaining = 0
 
-    @trips.each do |trip|
+    @selected_trip.each do |trip|
       remaining += trip.budget
     end
 

@@ -25,8 +25,36 @@
 
   <%# Filters %>
   <div id="exp-filter" class="flex justify-around mb-5">
-    <div class="border border-gray-300 rounded-md p-2">Trips</div>
-    <div class="border border-gray-300 rounded-md p-2">Category</div>
+    <%# Trips %>
+    <div class="dropdown dropdown-start">
+      <div tabindex="0" role="button" class="border border-gray-300 rounded-md p-2">Trips</div>
+
+      <ul
+        tabindex="-1"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <% @trips.each do |trip|%>
+          <li>
+            <%= link_to(trip.country, expenses_path(country: trip.country)) %>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+
+    <%# Category %>
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="border border-gray-300 rounded-md p-2">Category</div>
+
+      <ul
+        tabindex="-1"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <% @expenses.each do |expense|%>
+          <li>
+            <%= link_to(expense.category, "#") %>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+
   </div>
 
   <%# Spending Pie Chart %>
