@@ -38,12 +38,12 @@ If you need user details (monthly income, recurring bills, currency, or goals), 
 
   def send_question
 
-    @ruby_llm_chat = RubyLLM.context do |config|
-      config.openai_api_key = ENV['GITHUB_TOKEN']
-      config.openai_api_base = "https://models.inference.ai.azure.com"
-    end
+    # @ruby_llm_chat = RubyLLM.context do |config|
+      # config.openai_api_key = ENV['GITHUB_TOKEN']
+      # config.openai_api_base = "https://models.inference.ai.azure.com"
+    # end
 
-    @ruby_llm_chat = @ruby_llm_chat.chat
+    @ruby_llm_chat = RubyLLM.chat
 
     build_conversation_history
 

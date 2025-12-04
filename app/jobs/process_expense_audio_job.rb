@@ -80,13 +80,13 @@ class ProcessExpenseAudioJob < ApplicationJob
 
       expense.update!(audio_transcript: transcription.text) # add text
 
-      @ruby_llm_chat = RubyLLM.context do |config|
-        config.openai_api_key = ENV['GITHUB_TOKEN']
-        config.openai_api_base = "https://models.inference.ai.azure.com"
-      end
+      # @ruby_llm_chat = RubyLLM.context do |config|
+        # config.openai_api_key = ENV['GITHUB_TOKEN']
+        # config.openai_api_base = "https://models.inference.ai.azure.com"
+      # end
 
       # # Create expense record as JSON with transcription
-      ruby_llm_chat = @ruby_llm_chat.chat
+      ruby_llm_chat = RubyLLM.chat
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
         
       # extraction of audio details
