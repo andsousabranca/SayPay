@@ -42,17 +42,15 @@
       <% end %>
 
     <% else %>
-      <div class="max-w-md mx-auto">
-        <%= link_to new_trip_path,
-            class: "w-full bg-white rounded-2xl shadow-md overflow-hidden border border-dashed border-[#C9D2CF] block" do %>
-          <div class="p-6 flex flex-col items-center">
-            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#21A179] text-white mb-2">
-              <i data-lucide="plus" class="w-6 h-6"></i>
-            </div>
-            <p class="text-sm text-[#06231B]/70">Start your first trip</p>
+      <%= link_to new_trip_path,
+          class: "w-full bg-white rounded-2xl shadow-md overflow-hidden border border-dashed border-[#C9D2CF] block" do %>
+        <div class="p-6 flex flex-col items-center">
+          <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#21A179] text-white mb-2">
+            <i data-lucide="plus" class="w-6 h-6"></i>
           </div>
-        <% end %>
-      </div>
+          <p class="text-sm text-[#06231B]/70">Start your first trip</p>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

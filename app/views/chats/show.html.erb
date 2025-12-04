@@ -3,15 +3,19 @@
 <%= turbo_stream_from @chat %>
 
   <%# Container %>
-  <div class="bg-[#F2FFFB] rounded-t-2xl p-5 flex flex-grow flex-col">
+<div class="bg-[#F2FFFB] rounded-t-2xl flex flex-col flex-1 min-h-0">
+  
+  <%# Inner white chat card %>
+  <div class="rounded-2xl shadow-md flex flex-col flex-1 overflow-hidden min-h-0">
 
-  <%# Messages %>
-  <div id ="messages" class="p-6 flex-1 overflow-auto">
-    <%= render "messages/messages", messages: @chat.messages %>
-  </div>
+    <%# Messages container that is scrollable %>
+    <div id ="messages" class="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
+      <%= render "messages/messages", messages: @chat.messages %>
+    </div>
 
-  <%# Chatbox  %>
-  <div id="new_message_container" class="chat-area flex flex-col border rounded-xl m-2 p-2 bg-[#DDF8F0]">
-     <%= render "messages/form", chat: @chat, message: @message %>
+    <%# Chatbox  %>
+    <div id="new_message_container" class="bg-[#F7FAF9] p-3 flex-shrink-0">
+      <%= render "messages/form", chat: @chat, message: @message %>
+    </div>
   </div>
 </div>

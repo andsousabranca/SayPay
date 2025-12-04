@@ -1,0 +1,17 @@
+<div class="toast toast-top toast-center z-50 mt-20"
+     x-data="{ show: true }"
+     x-show="show"
+     x-init="setTimeout(() => show = false, 3000)">
+     
+  <% if notice %>
+    <div class="alert shadow-lg bg-[#AEEAD1] text-[#06231B]">
+      <span><%= notice %></span>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert shadow-lg bg-[#FF8A65] text-white">
+      <span><%= alert %></span>
+    </div>
+  <% end %>
+</div>

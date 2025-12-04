@@ -15,18 +15,22 @@
     <%= javascript_importmap_tags %>
 
     <%# Importing the Lucide icons into the project %>
-      <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-      <script>
-        document.addEventListener("turbo:load", () => {
-          lucide.createIcons();
-        });
-      </script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        lucide.createIcons();
+      });
+    </script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 
   </head>
   <body>
+    <%= render "shared/flashes" %>
 
     <% if show_nav_and_header? %>
-      <div class="min-h-screen flex flex-col bg-[#21A179]">
+      <div class="h-screen flex flex-col bg-[#21A179]">
 
         <%# HEADER %>
         <header>
@@ -34,12 +38,12 @@
         </header>
 
         <%# MAIN CONTENT (scrolls above navbar) %>
-        <main class="flex-1 overflow-y-auto bg-[#F2FFFB] rounded-t-2xl pb-20">
+        <main class="flex flex-col flex-1 bg-[#F2FFFB] rounded-t-2xl overflow-auto">
           <%= yield %>
         </main>
 
         <%# NAVBAR (always visible) %>
-        <nav class="fixed bottom-0 left-0 right-0 bg-white z-50 border-t border-gray-200">
+        <nav class="bg-white z-50 border-t border-gray-200">
           <%= render "shared/navbar_logged" %>
         </nav>
 
@@ -47,13 +51,18 @@
 
     <% else %>
 
-      <%# HEADER %>
-      <header class="fixed top-0 left-0 right-0 z-50 bg-base-100 shadow-sm">
-        <%= render "shared/header_public" %>
-      </header>
+      <div class="h-screen flex flex-col">
+
+        <%# HEADER %>
+        <header class="z-50 bg-base-100 shadow-sm">
+          <%= render "shared/header_public" %>
+        </header>
 
       <%# HOME PAGE (no navbar) %>
-      <%= yield %>
+        <main class="flex-1 overflow-auto">
+          <%= yield %>
+        </main>
+      </div>
     <% end %>
 
   </body>
