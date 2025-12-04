@@ -30,9 +30,9 @@
           <%= "from #{@trip.start_date.strftime('%d %B')} to #{@trip.end_date.strftime('%d %B %Y')}" %>
         </p>
       <% end %>
-      
+
       <p class="text-sm text-[#06231B]/60 mt-1">
-        Budget: <span class="font-semibold text-[#06231B]"><%= @trip.budget%> $</span>
+        Budget: <span class="font-semibold text-[#06231B]"><%= @summary[1].format(no_cents: true)%> $</span>
       </p>
 
       <p class="text-sm text-[#06231B]/60 mt-1">
