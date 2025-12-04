@@ -92,8 +92,6 @@ class ExpensesController < ApplicationController
   private
 
   def summarize_exp
-    # Replace with current user!
-
     @user = current_user.id
 
     remaining = 0
@@ -112,7 +110,7 @@ class ExpensesController < ApplicationController
 
     remaining -= spent
 
-    remaining_money = Money.new(remaining, current_user.base_currency)
+    remaining_money = Money.new(remaining , current_user.base_currency)
     spent_money = Money.new(spent, current_user.base_currency)
 
     return spent_money, remaining_money, count

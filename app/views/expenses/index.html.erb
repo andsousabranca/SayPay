@@ -1,34 +1,13 @@
 <%# Container %>
-<div class="bg-[#F2FFFB] rounded-t-2xl p-10 flex-grow">
+<div class="bg-[#F2FFFB] rounded-t-2xl p-5 flex-grow">
 
-  <%# Summary %>
-  <div id="exp-summary" class="border border-gray-300 rounded-md mb-5 bg-[#DDF8F0] p-2">
-    <h3 class="mb-3 text-md font-bold">Overview:</h3>
-    <div class="flex justify-between">
-      <div class="text-center">
-        <i class="w-full" data-lucide="dollar-sign"></i>
-        <p><%= @summary[0].format%></p>
-        <p class="italic">total spent</p>
-      </div>
-      <div>
-        <i class="w-full" data-lucide="wallet"></i>
-        <p class="text-center"><%=@summary[1].format%></p>
-        <p class="italic" >Remaining</p>
-      </div>
-      <div>
-        <i class="w-full" data-lucide="arrow-left-right"></i>
-        <p class="text-center"><%=@summary[2]%></p>
-        <p class="italic" >Transactions</p>
-      </div>
-    </div>
-  </div>
-
-  <%# Filters %>
-  <div id="exp-filter" class="mb-5">
+    <%# Filters %>
+  <div id="exp-filter" class="mb-5 flex justify-between">
+    <h3 class="mb-3 text-xl font-bold">Overview:</h3>
     <%# Trips %>
     <div class="dropdown dropdown-start hover:scale-110">
       <div tabindex="0" role="button" class="flex items-center rounded-md p-2 text-[#21A179] border">
-        <i data-lucide="sliders-horizontal"></i> <p class="ml-2 text-xl font-semibold">Filters</p>
+        <i data-lucide="sliders-horizontal"></i> <p class="ml-2 text-xl font-semibold">Trips</p>
       </div>
       <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><%= link_to("All my trips", expenses_path("")) %></li>
@@ -42,15 +21,36 @@
     </div>
   </div>
 
+  <%# Summary %>
+  <div id="exp-summary" class="border border-gray-300 rounded-md mb-5 bg-[#DDF8F0] p-2">
+    <div class="flex justify-between">
+      <div class="text-center">
+        <i class="w-full" data-lucide="banknote-arrow-down"></i>
+        <p class="text-center text-2xl font-semibold"><%= @summary[0].format(no_cents: true)%></p>
+        <p class="italic">Spent</p>
+      </div>
+      <div class="text-center">
+        <i class="w-full" data-lucide="wallet"></i>
+        <p class="text-center text-2xl font-semibold"><%=@summary[1].format(no_cents: true)%></p>
+        <p class="italic" >Budget remaining</p>
+      </div>
+      <div class="text-center">
+        <i class="w-full" data-lucide="arrow-left-right"></i>
+        <p class="text-center text-2xl font-semibold"><%=@summary[2]%></p>
+        <p class="italic" >Transactions</p>
+      </div>
+    </div>
+  </div>
+
   <%# Spending Pie Chart %>
   <div class="border border-gray-300 rounded-md mb-5 p-2">
 
-    <h3 class="p-5 mb-5 text-xl font-bold">Spending</h3>
+    <h3 class="p-5 mb-5 text-xl font-bold">Spending per Category</h3>
 
     <%= pie_chart @expenses_by_category,
       donut: true,
       library: {
-        cutout: "70%",
+        cutout: "60%",
         plugins: {
           legend: {
             position: "bottom",
@@ -69,11 +69,10 @@
 
   </div>
 
-
   <%# Categories Column Chart %>
   <div class=" border border-gray-300 rounded-md mb-5 p-2">
 
-    <h3 class="p-5 mb-5 text-xl font-bold">Popular Categories</h3>
+    <h3 class="p-5 mb-5 text-xl font-bold">Transactions per Category</h3>
 
     <%= column_chart @amount_by_category,
       colors: [
@@ -88,7 +87,7 @@
   <%# Per Country Chart %>
   <div class=" border border-gray-300 rounded-md mb-5 p-2">
 
-    <h3 class="p-5 mb-5 text-xl font-bold">Per Trip</h3>
+    <h3 class="p-5 mb-5 text-xl font-bold">Spending per Trip</h3>
 
     <%= column_chart @spending_per_country,
       colors: [
@@ -102,7 +101,7 @@
 
   <%# Spending by day %>
   <div class="border border-gray-300 rounded-md mb-5 p-2">
-    <h3 class="text-xl font-bold mb-3">Spending Over Time</h3>
+    <h3 class="text-xl font-bold mb-3">Spending over Time</h3>
 
     <%= column_chart @spending_over_time,
         colors: ["#4E79A7"]
@@ -120,14 +119,18 @@
         <div id="logo" class="p-2 border-r">
           <p><%= expense.trip.country_acronym(expense.trip.country)%></p>
           <hr>
+
         </div>
 
         <div id="location-date" class="flex-grow p-2">
-          <p><%=expense.category%></p>
-          <p><%= expense.created_at.strftime("%d %B %Y at %-l:%M %p")%></p>
+          <div class="flex">
+            <i data-lucide=<%=expense_icons(expense.category)%>></i>
+            <p class="ml-2 text-xl font-semibold"><%=expense.category%></p>
+          </div>
+          <p class="text-sm"><%= expense.created_at.strftime("%d/%m/%Y")%></p>
         </div>
         <div id="price-category" class="p-2">
-          <p><%=expense.local_amount.format%></p>
+          <p class="text-xl"><%=expense.local_amount.format%></p>
           <p></p>
         </div>
       </li>

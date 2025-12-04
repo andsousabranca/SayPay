@@ -1,17 +1,17 @@
 <% @page_title = "Review your expense" %>
-<div class="bg-[#F2FFFB] rounded-t-2xl p-6 flex-grow">
+<div class="bg-[#F2FFFB] rounded-t-2xl p-5 flex-grow">
 
   <div class="bg-white rounded-2xl shadow-md p-6 space-y-5">
 
     <p class="text-sm text-[#06231B]/60 mb-2">
-      SayPay extracted these details from your recording.  
+      SayPay extracted these details from your recording.
       Adjust them if needed.
     </p>
 
     <%= form_with model: [@trip, @expense], local: true do |f| %>
 
       <%# <%= render "shared/error_messages", resource: @expense %>
-      
+
       <!-- AMOUNT -->
       <div>
         <%= f.label :local_amount, "Amount", class: "block text-sm font-medium text-[#06231B] mt-4" %>
