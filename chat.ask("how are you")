@@ -1,0 +1,65 @@
+=> [32m#<RubyLLM::Chat:0x00007a2113530148[0m
+ @context[32m=[0m[1;36mnil[0m,
+ @headers[32m=[0m{},
+ @messages[32m=[0m[],
+ @model[32m=[0m
+  [32m#<RubyLLM::Model::Info:0x00007a21186c30c8[0m
+   @capabilities[32m=[0m[[31m[1;31m"[0m[31mbatch[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31mfunction_calling[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31mstructured_output[1;31m"[0m[31m[0m],
+   @context_window[32m=[0m[1;34m1047576[0m,
+   @created_at[32m=[0m[1;36mnil[0m,
+   @family[32m=[0m[31m[1;31m"[0m[31mgpt-4.1-nano[1;31m"[0m[31m[0m,
+   @id[32m=[0m[31m[1;31m"[0m[31mgpt-4.1-nano[1;31m"[0m[31m[0m,
+   @knowledge_cutoff[32m=[0m[1;36mnil[0m,
+   @max_output_tokens[32m=[0m[1;34m32768[0m,
+   @metadata[32m=[0m{[33m:object[0m=>[31m[1;31m"[0m[31mmodel[1;31m"[0m[31m[0m, [33m:owned_by[0m=>[31m[1;31m"[0m[31msystem[1;31m"[0m[31m[0m},
+   @modalities[32m=[0m
+    [32m#<RubyLLM::Model::Modalities:0x00007a21192333b8[0m
+     @input[32m=[0m[[31m[1;31m"[0m[31mimage[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31mtext[1;31m"[0m[31m[0m],
+     @output[32m=[0m[[31m[1;31m"[0m[31membeddings[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31mtext[1;31m"[0m[31m[0m][32m>[0m,
+   @name[32m=[0m[31m[1;31m"[0m[31mGPT-4.1 nano[1;31m"[0m[31m[0m,
+   @pricing[32m=[0m
+    [32m#<RubyLLM::Model::Pricing:0x00007a2119233110[0m
+     @data[32m=[0m
+      {[33m:text_tokens[0m=>
+        [32m#<RubyLLM::Model::PricingCategory:0x00007a2119232af8[0m
+         @batch[32m=[0m
+          [32m#<RubyLLM::Model::PricingTier:0x00007a2119232968[0m
+           @values[32m=[0m{[33m:input_per_million[0m=>[1;35m0.05[0m, [33m:output_per_million[0m=>[1;35m0.2[0m}[32m>[0m,
+         @standard[32m=[0m
+          [32m#<RubyLLM::Model::PricingTier:0x00007a2119232a80[0m
+           @values[32m=[0m
+            {[33m:input_per_million[0m=>[1;35m0.1[0m,
+             [33m:cached_input_per_million[0m=>[1;35m0.025[0m,
+             [33m:output_per_million[0m=>[1;35m0.4[0m}[32m>[0m[32m>[0m}[32m>[0m,
+   @provider[32m=[0m[31m[1;31m"[0m[31mopenai[1;31m"[0m[31m[0m[32m>[0m,
+ @on[32m=[0m{[33m:new_message[0m=>[1;36mnil[0m, [33m:end_message[0m=>[1;36mnil[0m, [33m:tool_call[0m=>[1;36mnil[0m, [33m:tool_result[0m=>[1;36mnil[0m},
+ @params[32m=[0m{},
+ @provider[32m=[0m
+  [32m#<RubyLLM::Providers::OpenAI:0x00007a2118443fc8[0m
+   @config[32m=[0m
+    [32m#<RubyLLM::Configuration:0x00007a2118eaa840[0m
+     @default_embedding_model[32m=[0m[31m[1;31m"[0m[31mtext-embedding-3-small[1;31m"[0m[31m[0m,
+     @default_image_model[32m=[0m[31m[1;31m"[0m[31mgpt-image-1[1;31m"[0m[31m[0m,
+     @default_model[32m=[0m[31m[1;31m"[0m[31mgpt-4.1-nano[1;31m"[0m[31m[0m,
+     @default_moderation_model[32m=[0m[31m[1;31m"[0m[31momni-moderation-latest[1;31m"[0m[31m[0m,
+     @default_transcription_model[32m=[0m[31m[1;31m"[0m[31mwhisper-1[1;31m"[0m[31m[0m,
+     @http_proxy[32m=[0m[1;36mnil[0m,
+     @log_file[32m=[0m[32m#<IO:<STDOUT>>[0m,
+     @log_level[32m=[0m[1;34m1[0m,
+     @log_stream_debug[32m=[0m[1;36mfalse[0m,
+     @max_retries[32m=[0m[1;34m3[0m,
+     @model_registry_class[32m=[0m[31m[1;31m"[0m[31mModel[1;31m"[0m[31m[0m,
+     @model_registry_file[32m=[0m
+      [31m[1;31m"[0m[31m/home/pkeane/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/ruby_llm-1.9.1/lib/ruby_llm/models.json[1;31m"[0m[31m[0m,
+     @openai_api_base[32m=[0m[31m[1;31m"[0m[31mhttps://models.inference.ai.azure.com[1;31m"[0m[31m[0m,
+     @request_timeout[32m=[0m[1;34m300[0m,
+     @retry_backoff_factor[32m=[0m[1;34m2[0m,
+     @retry_interval[32m=[0m[1;35m0.1[0m,
+     @retry_interval_randomness[32m=[0m[1;35m0.5[0m,
+     @use_new_acts_as[32m=[0m[1;36mtrue[0m[32m>[0m,
+   @connection[32m=[0m
+    [32m#<RubyLLM::Connection:0x00007a2118443f50[0m
+     @provider[32m=[0m[32m#<RubyLLM::Providers::OpenAI:0x00007a2118443fc8[0m ...[32m>[0m[32m>[0m[32m>[0m,
+ @schema[32m=[0m[1;36mnil[0m,
+ @temperature[32m=[0m[1;36mnil[0m,
+ @tools[32m=[0m{}[32m>[0m
