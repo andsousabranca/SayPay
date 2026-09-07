@@ -61,7 +61,7 @@ class ProcessExpenseAudioJob < ApplicationJob
   def perform(expense_id)
     expense = Expense.find(expense_id)
     return unless expense&.audio&.attached?
-    
+
     blob = expense.audio.blob
 
     blob.open(tmpdir: Dir.tmpdir) do |tempfile|
@@ -88,7 +88,7 @@ class ProcessExpenseAudioJob < ApplicationJob
       # # Create expense record as JSON with transcription
       ruby_llm_chat = RubyLLM.chat
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-        
+
       # extraction of audio details
       response = ruby_llm_chat.ask("Please extract expense details from this transcribed text: #{transcription.text}") # add text
 
@@ -97,6 +97,7 @@ class ProcessExpenseAudioJob < ApplicationJob
         expense.update(
           local_amount_cents: parsed["local_amount"],
           local_amount_currency: parsed["local_currency"] || "USD",
+          base_amount_currency: expense.trip.budget_currency,
           category: parsed["category"],
           notes: parsed["notes"]
         )

@@ -78,7 +78,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: say_pay_production
-  username: say_pay
-  password: <%= ENV["SAY_PAY_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
