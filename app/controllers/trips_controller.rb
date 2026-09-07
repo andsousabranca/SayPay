@@ -12,7 +12,6 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
-    @trip.budget_currency = current_user.base_currency || "USD"
 
     # Unsplash Image fetch
     initial_image_url = UnsplashService.new("#{@trip.country}").call.first.urls.raw
